@@ -2,8 +2,11 @@ import styles from "../styles/AppBody.module.css"
 /** @jsxImportSource theme-ui */
 import { ThemeProvider, Container } from 'theme-ui'
 import  theme  from '../theme.js'
+import { Provider } from 'react-redux'
+import store from "@/app/store"
 export default function AppBody({ children }) {
- return  ( 
+ return  (
+    <Provider store={store}>
     <ThemeProvider theme={theme}>
     <div>
     <Container sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
@@ -14,6 +17,6 @@ export default function AppBody({ children }) {
     </main>
     </div>
     </ThemeProvider>
-            
+    </Provider>
  )
 }

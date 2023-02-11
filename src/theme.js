@@ -8,7 +8,7 @@ export default {
   },
   colors: {
     text: '#000',
-    background: '#fff',
+    background: '#eff7f6',
     primary: '#A2D2FF',
     secondary: '#CDB4DB',
     accent: '#FFC8DD',
@@ -23,7 +23,7 @@ export default {
   borderWidths: {
     thin: '0.0625em',
     normal: '0.125em',
-    thick: '0.25em'
+    thick: '0.1875em'
   },
   radii: {
     small: '0.25em',

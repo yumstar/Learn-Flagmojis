@@ -1,10 +1,8 @@
 import { useCallback, useState, useEffect} from "react";
-import axios from "axios";
 import { Container } from "theme-ui";
+import axios from "axios";
 import{ countriesQuery }  from "@/queries/countriesQuery";
 import FlagCard from "./FlagCard";
-
-
 export default function FlagGrid() {
     const styles = {
         width: '100%',
@@ -13,10 +11,11 @@ export default function FlagGrid() {
         borderStyle: 'solid',
         p: 4,
         borderRadius: 'small',
-        borderColor: 'accent',
+        borderColor: 'muted',
         display: 'flex',
         justifyContent: 'center',
-        flexWrap: 'wrap'}
+        flexWrap: 'wrap',
+        userSelect: 'none'}
 const [flags, setFlags] = useState([]);
 
 const getCountries = useCallback(() => {
@@ -35,7 +34,7 @@ useEffect(() => {
     return (
         <Container sx={styles} >
 
-            {flags.map(({name, emoji}) => <FlagCard name={name} emoji={emoji}/>)}
+            {flags.map(({name, emoji}, i) => <FlagCard name={name} emoji={emoji} key={i} childIndex={i}/>)}
         </Container>
     )
 }

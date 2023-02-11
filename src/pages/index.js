@@ -8,7 +8,8 @@ import  theme  from '../theme.js'
 import AppBody from '@/components/AppBody.js'
 import FlagGrid from '@/components/FlagGrid.js'
 
-const inter = Inter({ subsets: ['latin'] })
+import { Provider } from 'react-redux'
+
 
 export default function Home() {
   return (
