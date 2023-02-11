@@ -1,12 +1,50 @@
 import { Container, Box, Text } from "theme-ui"
 import {Collapse} from 'react-collapse';
-import { useState } from "react";
-export default function FlagCard(props) {
+import { useCallback, useState, useEffect } from "react";
+import { countryInfoQuery } from "@/queries/countriesQuery";
+import axios from "axios";
+export default function FlagCard({name, emoji, code, childIndex}) {
     const [showInfo, setShowInfo] = useState(false)
+    const [countryCode, setCountryCode] = useState(code)
+    const [countryInfo, setCountryInfo] = useState({})
+
     const toggleShowInfo = (e) => {
         setShowInfo(!showInfo);
         console.log(showInfo)
     }
+
+const countryInfoListString = (list) => {
+    return list.map((item => item))
+}
+ const getCountryInfo = useCallback(() => {
+                if(showInfo){
+                const query = JSON.stringify(countryInfoQuery(countryCode));
+                axios.post("https://countries.trevorblades.com/graphql", query,{headers: {"Content-Type": "application/json"}})
+                .then((response) => {
+                    var countryInfoRes = response.data.data.country;
+                    var countryInfoLanguages = [];
+                    var countryInfoStates = []
+                    countryInfoRes.languages.forEach(language => {
+                        countryInfoLanguages.push(language.name)
+                    });
+                    countryInfoRes.states.forEach(state => {
+                        countryInfoStates.push(state.name)
+                    });
+                    countryInfoRes.languages = countryInfoLanguages;
+                    countryInfoRes.states = countryInfoStates;
+                    countryInfoRes.continent = countryInfoRes.continent.name;
+                    setCountryInfo(countryInfoRes);
+                 })
+                .catch((error) => console.log(error))
+
+}}, [showInfo])
+            useEffect(() => {
+                getCountryInfo();
+                return () => {
+                    // cleanup
+                };
+            }, [showInfo]); 
+
     const containerStyles = {
         position: 'relative',
         maxWidth: '200px',
@@ -49,7 +87,7 @@ export default function FlagCard(props) {
     const popoutStyles = {
         position: 'absolute',
         borderWidth: 'normal',
-        borderStyle: 'solid',
+        // borderStyle: 'solid',
         borderColor: 'red',
         borderRadius: 'normal',
         display: 'flex',
@@ -67,26 +105,36 @@ export default function FlagCard(props) {
         clear: 'both',
         alignSelf: 'center',
         borderWidth: 'normal',
-        borderStyle: 'solid',
-        borderColor: 'primary',
+        // borderStyle: 'solid',
+        // borderColor: 'primary',
         borderRadius: 'normal',
-        zIndex: '0'
+        textAlign: 'center',
+        zIndex: '0',
+        fontFamily: 'info',
+        fontSize: 2
     }
+    console.log(countryInfo)
     return (
         <Box sx={containerStyles} onClick={toggleShowInfo}>
         <Container sx={innerContainerStyles}>
             <Box sx={emojiContainerStyles}>
-            <Text >{props.emoji}</Text>
+            <Text >{emoji}</Text>
             </Box>
-            <Text>{props.name}</Text>
+            <Text>{name}</Text>
         </Container>
-        {props.childIndex == 0 &&<Container sx={popoutStyles}>
+        <Container sx={popoutStyles}>
         <Container sx={innerPopoutStyles}>
-        <Collapse isOpened="true">
-            <div>c</div>
-        </Collapse>
+            <Text>{`Native Name:  ${countryInfo.native}`}<br/></Text>
+            <Text>{`Phone Code:  +${countryInfo.phone}`}<br/></Text>
+            <Text>{`Continent:  ${countryInfo.continent}`}<br/></Text>
+            <Text>{`Capital:  ${countryInfo.capital}`}<br/></Text>
+            <Text>{`Currency:  ${countryInfo.currency}`}<br/></Text>
+            <Text>{countryInfo.languages && countryInfo.languages.length > 0 && `Languages: ${countryInfoListString(countryInfo.languages.slice(0, 2))}`} </Text>
+            <Text>{countryInfo.states && countryInfo.states.length > 0 && `States: ${countryInfoListString(countryInfo.states.slice(0, 2))}`} </Text>
+            
+
         </Container>
-        </Container>}
+        </Container>
         </Box>
     )
 }

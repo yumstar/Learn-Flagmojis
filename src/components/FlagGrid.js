@@ -34,7 +34,7 @@ useEffect(() => {
     return (
         <Container sx={styles} >
 
-            {flags.map(({name, emoji}, i) => <FlagCard name={name} emoji={emoji} key={i} childIndex={i}/>)}
+            {flags.map(({code,name, emoji}, i) => <FlagCard code={code} name={name} emoji={emoji} key={i} childIndex={i}/>)}
         </Container>
     )
 }

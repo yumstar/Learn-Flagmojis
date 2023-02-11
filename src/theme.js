@@ -4,7 +4,8 @@ export default {
   fonts: {
     body: 'system-ui, sans-serif',
     heading: '"Avenir Next", sans-serif',
-    monospace: 'Menlo, monospace',
+    monospace: 'Ubuntu Mono, monospace',
+    info: 'Poiret One, cursive'
   },
   colors: {
     text: '#000',
