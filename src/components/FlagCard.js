@@ -1,10 +1,11 @@
-import { Container, Box, Text } from "theme-ui"
+import { Container, Box, Text, Spinner } from "theme-ui"
 import {Collapse} from 'react-collapse';
 import { useCallback, useState, useEffect } from "react";
 import { countryInfoQuery } from "@/queries/countriesQuery";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import {selectExpanded, selectLast, selectCurrent, noneExpandedOpen, someExpandedOpen, someExpandedClose } from "@/features/GridSlice";
+import styles from "@/theme";
+import {selectExpanded, selectLast, selectCurrent, noneExpandedOpen, someExpandedOpen, someExpandedClose, changeCurrent } from "@/features/GridSlice";
 export default function FlagCard({name, emoji, code, childIndex}) {
     const [showInfo, setShowInfo] = useState(false)
     const [countryCode, setCountryCode] = useState(code)
@@ -15,28 +16,12 @@ export default function FlagCard({name, emoji, code, childIndex}) {
     const currentExpanded = useSelector((state) => state.grid.currentItemExpanded)
 
     const toggleShowInfo = (e) => {
-        console.log("exp" + expanded)
-        console.log("last" + lastExpanded)
-        console.log(currentExpanded)
-        if(currentExpanded == -1 && !expanded) {
-            dispatch(noneExpandedOpen(childIndex))
-            setShowInfo(true)
-        }
-        else if(currentExpanded == childIndex && expanded) {
-            dispatch(someExpandedClose())
-            setShowInfo(false)
-        }
-        // if(lastExpanded == childIndex){
-        //     setShowInfo(false)
-        // }
-        else if(currentExpanded != childIndex && expanded){
-            dispatch(noneExpandedOpen(childIndex))
-        }
-        if(lastExpanded == childIndex && expanded) {
-            setShowInfo(false)
-        }
-        
+        dispatch(changeCurrent(childIndex))
     }
+
+    useEffect(() => {
+        setShowInfo(currentExpanded == childIndex)
+    }, [currentExpanded])
 
 const countryInfoListString = (list) => {
     return list.map((item => item))
@@ -125,7 +110,7 @@ const countryInfoListString = (list) => {
         opacity: '1',
         backgroundColor: 'highlight',
         height: '120%',
-        width: '160%'
+        width: '120%'
     }
     const innerPopoutStyles = {
         clear: 'both',
@@ -153,15 +138,14 @@ const countryInfoListString = (list) => {
         </Container>
         <Container sx={popoutStyles}>
         <Container sx={innerPopoutStyles}>
-           {countryInfo.native && <Box><Text sx={labelStyles}>Native Name:</Text> <Text>{`${countryInfo.native}`}<br/></Text></Box>}
-           {countryInfo.phone && <Box><Text sx={labelStyles}>Phone Code:</Text> <Text>{`${countryInfo.phone}`}<br/></Text></Box>}
-           {countryInfo.continent && <Box><Text sx={labelStyles}>Continent:</Text> <Text>{`${countryInfo.continent}`}<br/></Text></Box>}
-           {countryInfo.capital && <Box><Text sx={labelStyles}>Capital:</Text> <Text>{`${countryInfo.capital}`}<br/></Text></Box>}
-           {countryInfo.currency && <Box><Text sx={labelStyles}>Currency:</Text> <Text>{`${countryInfo.currency}`}<br/></Text></Box>}
-           {countryInfo.languages && countryInfo.languages.length > 0  && <Box><Text sx={labelStyles}>Languages:</Text> <Text>{`${countryInfoListString(countryInfo.languages.slice(0, 2))}`}<br/></Text></Box>}
-           {countryInfo.languages && countryInfo.states.length > 0  && <Box><Text sx={labelStyles}>States:</Text> <Text>{`${countryInfoListString(countryInfo.states.slice(0, 2))}`}<br/></Text></Box>}
-           {<Text>{currentExpanded}<br/></Text>}
-           {<Text>{lastExpanded}</Text>}
+           {Object.keys(countryInfo).length == 0 && <Spinner sx={{color: 'accent'}}/>}     
+           {countryInfo && countryInfo.native && <Box><Text sx={labelStyles}>Native Name:</Text> <Text>{`${countryInfo.native}`}<br/></Text></Box>}
+           {countryInfo && countryInfo.phone && <Box><Text sx={labelStyles}>Phone Code:</Text> <Text>{`${countryInfo.phone}`}<br/></Text></Box>}
+           {countryInfo && countryInfo.continent && <Box><Text sx={labelStyles}>Continent:</Text> <Text>{`${countryInfo.continent}`}<br/></Text></Box>}
+           {countryInfo && countryInfo.capital && <Box><Text sx={labelStyles}>Capital:</Text> <Text>{`${countryInfo.capital}`}<br/></Text></Box>}
+           {countryInfo && countryInfo.currency && <Box><Text sx={labelStyles}>Currency:</Text> <Text>{`${countryInfo.currency}`}<br/></Text></Box>}
+           {countryInfo && countryInfo.languages && countryInfo.languages.length > 0  && <Box><Text sx={labelStyles}>Languages:</Text> <Text>{`${countryInfoListString(countryInfo.languages.slice(0, 2))}`}<br/></Text></Box>}
+           {countryInfo && countryInfo.languages && countryInfo.states.length > 0  && <Box><Text sx={labelStyles}>States:</Text> <Text>{`${countryInfoListString(countryInfo.states.slice(0, 2))}`}<br/></Text></Box>}
         </Container>
         </Container>
         </Box>

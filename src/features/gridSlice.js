@@ -21,10 +21,13 @@ export const gridSlice = createSlice({
             state.itemExpanded = false
             state.lastItemExpanded = state.currentItemExpanded
             state.currentItemExpanded = -1
+        },
+        changeCurrent: (state, itemIndex) => {
+            state.currentItemExpanded = itemIndex.payload;
         }
     }
 })
-export const { noneExpandedOpen, someExpandedOpen, someExpandedClose } = gridSlice.actions
+export const { noneExpandedOpen, someExpandedOpen, someExpandedClose, changeCurrent } = gridSlice.actions
 
 export const selectExpanded = (state) => state.grid.itemExpanded;
 export const selectLast = (state) => state.grid.lastItemExpanded;
