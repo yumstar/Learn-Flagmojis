@@ -16,7 +16,7 @@ export const countryInfoQuery = (id) => {
         query: `
         query queryCountriesInfo{
             country(code: "${id}")  {
-                 code
+               code
                native
                phone
                continent {

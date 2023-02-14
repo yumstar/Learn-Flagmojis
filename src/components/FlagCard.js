@@ -5,6 +5,7 @@ import { countryInfoQuery } from "@/queries/countriesQuery";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "@/theme";
+import { keyframes } from '@emotion/react'
 import {selectExpanded, selectLast, selectCurrent, noneExpandedOpen, someExpandedOpen, someExpandedClose, changeCurrent } from "@/features/GridSlice";
 export default function FlagCard({name, emoji, code, childIndex}) {
     const [showInfo, setShowInfo] = useState(false)
@@ -16,7 +17,13 @@ export default function FlagCard({name, emoji, code, childIndex}) {
     const currentExpanded = useSelector((state) => state.grid.currentItemExpanded)
 
     const toggleShowInfo = (e) => {
-        dispatch(changeCurrent(childIndex))
+        if(currentExpanded != childIndex) {
+            dispatch(changeCurrent(childIndex))
+        }
+        else {
+            dispatch(changeCurrent(-1))
+        }
+        
     }
 
     useEffect(() => {
@@ -94,6 +101,7 @@ const countryInfoListString = (list) => {
         // justifyContent: 'center',
 
     }
+    const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
     const popoutStyles = {
         position: 'absolute',
         borderWidth: 'normal',
@@ -110,7 +118,14 @@ const countryInfoListString = (list) => {
         opacity: '1',
         backgroundColor: 'highlight',
         height: '120%',
-        width: '120%'
+        width: '120%',
+        animation: `${fadeIn} 1s`
+        // transition: 'opacity 4s'
+    }
+    
+    const popoutCloseStyles = {
+        ...popoutStyles,
+        animation: `${fadeIn} 1s reverse`
     }
     const innerPopoutStyles = {
         clear: 'both',
@@ -122,7 +137,9 @@ const countryInfoListString = (list) => {
         textAlign: 'center',
         zIndex: '50',
         fontFamily: 'info',
-        fontSize: 3
+        fontSize: 3,
+        opacity: '1',
+        // animation: `${fadeIn} 4s`
     }
     const labelStyles = {
         fontWeight: 'bold'
@@ -136,16 +153,18 @@ const countryInfoListString = (list) => {
             </Box>
             <Text>{name}</Text>
         </Container>
-        <Container sx={popoutStyles}>
+        <Container sx={showInfo? popoutStyles: popoutCloseStyles}>
         <Container sx={innerPopoutStyles}>
            {Object.keys(countryInfo).length == 0 && <Spinner sx={{color: 'accent'}}/>}     
            {countryInfo && countryInfo.native && <Box><Text sx={labelStyles}>Native Name:</Text> <Text>{`${countryInfo.native}`}<br/></Text></Box>}
-           {countryInfo && countryInfo.phone && <Box><Text sx={labelStyles}>Phone Code:</Text> <Text>{`${countryInfo.phone}`}<br/></Text></Box>}
            {countryInfo && countryInfo.continent && <Box><Text sx={labelStyles}>Continent:</Text> <Text>{`${countryInfo.continent}`}<br/></Text></Box>}
+           {countryInfo && countryInfo.states && countryInfo.states.length > 0  && <Box><Text sx={labelStyles}>States:</Text> <Text>{`${countryInfoListString(countryInfo.states.slice(0, 3))}`}<br/></Text></Box>}
            {countryInfo && countryInfo.capital && <Box><Text sx={labelStyles}>Capital:</Text> <Text>{`${countryInfo.capital}`}<br/></Text></Box>}
+           {countryInfo && countryInfo.languages && countryInfo.languages.length > 0  && <Box><Text sx={labelStyles}>Languages:</Text> <Text>{`${countryInfoListString(countryInfo.languages.slice(0, 3))}`}<br/></Text></Box>}
            {countryInfo && countryInfo.currency && <Box><Text sx={labelStyles}>Currency:</Text> <Text>{`${countryInfo.currency}`}<br/></Text></Box>}
-           {countryInfo && countryInfo.languages && countryInfo.languages.length > 0  && <Box><Text sx={labelStyles}>Languages:</Text> <Text>{`${countryInfoListString(countryInfo.languages.slice(0, 2))}`}<br/></Text></Box>}
-           {countryInfo && countryInfo.languages && countryInfo.states.length > 0  && <Box><Text sx={labelStyles}>States:</Text> <Text>{`${countryInfoListString(countryInfo.states.slice(0, 2))}`}<br/></Text></Box>}
+           {countryInfo && countryInfo.phone && <Box><Text sx={labelStyles}>Phone Code:</Text> <Text>{`+${countryInfo.phone}`}<br/></Text></Box>}
+          
+          
         </Container>
         </Container>
         </Box>
