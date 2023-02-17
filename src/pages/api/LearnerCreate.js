@@ -3,11 +3,8 @@ import mongoose from "mongoose"
 import connectToDB  from '@/server/utils/connectDB'
 import dotenv from "dotenv"
 import bcrypt from 'bcrypt'
-import Joi from 'joi'
-import { JoiPasswordComplexity } from 'joi-password-complexity'
 import { object, string} from 'yup';
 import { Learner, validateSchema } from '@/server/models/LearnerModel.js'
-import validate from "@/lib/middlewares/validation"
 // import clientPromise from '@/server/utils/mongodb'
 dotenv.config()
 const handler = async (req, res) => {
@@ -15,13 +12,12 @@ const handler = async (req, res) => {
   if(req.method == 'POST'){
     try {
       const {name, email, password} = req.body
-      let learnerSchema = object({
-        name: string().required().typeError("Name not a string"),
-        email: string().required().typeError("email not a string"),
-        password: string().required().typeError("password not a string")
-      })
-      const Learner = await learnerSchema.validate(req.body)
-      res.send(Learner)
+      // let learnerSchema = object({
+      //   name: string().required().typeError("Name not a string"),
+      //   email: string().required().typeError("email not a string"),
+      //   password: string().required().typeError("password not a string")
+      // })
+      // const Learner = await learnerSchema.validate(req.body)
       // const {error, value} = schema.validate(req.body)
       // res.send(value)
       // if(error) {
@@ -39,7 +35,7 @@ const handler = async (req, res) => {
       res.status(200).json({message: 'Learner registered'})
     }
     catch(error) {
-      return res.status(500).json(error)
+      return res.status(500).send("Error")
       // return res.status(500).json({message: "Error"})
     }
   }
