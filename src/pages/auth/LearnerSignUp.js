@@ -4,7 +4,7 @@ import {useRef} from 'react'
 export default function LearnerSignUp(){
     return (
     <AppBody>
-        <SignUp/>
+        <SignUp></SignUp>
     </AppBody>
     )
 }

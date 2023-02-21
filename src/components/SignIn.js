@@ -2,15 +2,25 @@ import { Formik, Form, Field, ErrorMessage } from "formik"
 import { useRef } from "react"
 import {signInInitValues, signInValidationSchema} from "../utils/validation"
 import { sendApi } from "@/utils/api"
+import { Container, Label } from "theme-ui"
 export default function SignIn() {
+
+    const signInStyles = {
+        fontFamily: 'body',
+        fontSize: 3,
+        display: 'flex',
+        justifyContent: 'center',
+        border: '1px solid black'
+    }
     return (<>
-    <div className="sign-in">
+    <Container className="sign-in" sx={signInStyles}>
         <Formik
         initialValues={signInInitValues}
         validationSchema={signInValidationSchema}
         onSubmit={(values) => sendApi(values, "/api/LearnerLogin/")}>
             <Form>
-            <label htmlFor="email">E-mail</label>
+            {/* <label htmlFor="email">E-mail</label> */}
+            <Label>E-mail:</Label>
             <Field name="email" type="email" />
             <ErrorMessage name="email" />
             <br/>
@@ -21,6 +31,6 @@ export default function SignIn() {
             <button type="submit">Submit</button>
             </Form>
         </Formik>
-    </div>
+    </Container>
     </>)
 }
