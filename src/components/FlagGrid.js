@@ -3,6 +3,7 @@ import { Container } from "theme-ui";
 import axios from "axios";
 import{ countriesQuery }  from "@/queries/countriesQuery";
 import FlagCard from "./FlagCard";
+import { Spinner } from "theme-ui";
 export default function FlagGrid() {
     const styles = {
         width: '100%',
@@ -33,7 +34,7 @@ useEffect(() => {
 }, [getCountries]); 
     return (
         <Container sx={styles} >
-
+            {flags.length == 0 && <Spinner sx={{color: 'accent'}}/>}
             {flags.map(({code,name, emoji}, i) => <FlagCard code={code} name={name} emoji={emoji} key={i} childIndex={i}/>)}
         </Container>
     )

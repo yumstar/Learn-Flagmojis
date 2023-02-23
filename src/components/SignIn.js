@@ -4,11 +4,18 @@ import { useRef } from "react"
 import {signInInitValues, signInValidationSchema} from "../utils/validation"
 import { sendApi } from "@/utils/api"
 import { isNotEmptyString } from "../utils/string"
-import { Box, Container, Label, Button, Text } from "theme-ui"
+import { Box, Label, Button, Text } from "theme-ui"
 import { AuthFormContainerStyles, AuthFormOuterStyles, AuthFormStyles, fieldStyles} from "@/styles/authenticationStyles"
+import { useRouter } from "next/router"
 import AuthError from "./AuthError"
 export default function SignIn() {
-    const handleSubmit = async (values) => {trysendApi(values, "/api/LearnerLogin/")}
+    const router  = useRouter()
+    const handleSubmit = async (values) => {
+        const res = await sendApi(values, "/api/LearnerLogin/");
+        // console.log()
+        localStorage.setItem("userToken", res.data.token)
+        router.push("/")
+    }
 
     return (<Box className="sign-in-container" sx={AuthFormContainerStyles}>
         <div className="sign-in" sx={AuthFormOuterStyles}>
