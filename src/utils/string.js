@@ -1,0 +1,1 @@
+export const isNotEmptyString = (string) => {return string && string.length > 0}

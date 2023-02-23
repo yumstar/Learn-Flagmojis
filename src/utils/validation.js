@@ -9,11 +9,11 @@ export const signInInitValues = {
     password: ""
 }
 export const signUpValidationSchema = Yup.object({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().email('Please provide a valid email address.').required(),
-    password: Yup.string().required('Password is required')
+    name: Yup.string().required('A name is required.'),
+    email: Yup.string().email('Please provide a valid email address.').required("An email address is required."),
+    password: Yup.string().required('A password is required.')
 })
-export const signImValidationSchema = Yup.object({
-    email: Yup.string().email('Please provide a valid email address.').required(),
+export const signInValidationSchema = Yup.object({
+    email: Yup.string().email('Please provide a valid email address.').required("An email address is required."),
     password: Yup.string().required('Password is required')
 })
