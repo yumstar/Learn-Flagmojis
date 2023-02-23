@@ -4,7 +4,7 @@ import { Text, Box } from "theme-ui";
 export default function AuthError({children}) {
     return (<div className="auth-error" sx={errorStyles}>
         <Text className="auth-error-icon">⚠️</Text>
-        <Text variant="error">{children}</Text>
+        <Text variant="validationError">{children}</Text>
     </div>
     )
 }

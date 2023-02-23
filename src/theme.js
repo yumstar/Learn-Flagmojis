@@ -32,9 +32,14 @@ export default {
       fontSize: 4,
       textDecoration: 'underline'
     },
-    error: {
+    validationError: {
       color: 'red',
       fontSize: 1
+    },
+    messageError: {
+      color: 'red',
+      fontSize: 2,
+      m:2
     }
   },
   borderWidths: {

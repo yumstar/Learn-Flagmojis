@@ -35,7 +35,7 @@ const handler = async (req, res) => {
       res.status(200).json({message: 'Learner registered'})
     }
     catch(error) {
-      return res.status(500).send("Error")
+      return res.status(500).json({message: "Error"})
       // return res.status(500).json({message: "Error"})
     }
   }

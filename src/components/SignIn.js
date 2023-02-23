@@ -5,18 +5,18 @@ import {signInInitValues, signInValidationSchema} from "../utils/validation"
 import { sendApi } from "@/utils/api"
 import { isNotEmptyString } from "../utils/string"
 import { Box, Container, Label, Button, Text } from "theme-ui"
-import { AuthFormContainerStyles, AuthFormStyles, fieldStyles} from "@/styles/authenticationStyles"
+import { AuthFormContainerStyles, AuthFormOuterStyles, AuthFormStyles, fieldStyles} from "@/styles/authenticationStyles"
 import AuthError from "./AuthError"
 export default function SignIn() {
     const handleSubmit = async (values) => {trysendApi(values, "/api/LearnerLogin/")}
 
     return (<Box className="sign-in-container" sx={AuthFormContainerStyles}>
-        <div className="sign-in" sx={AuthFormStyles}>
+        <div className="sign-in" sx={AuthFormOuterStyles}>
             <Formik
                 initialValues={signInInitValues}
                 validationSchema={signInValidationSchema}
                 onSubmit={handleSubmit}>
-                {({ errors, touched }) => (<Form>
+                {({ errors, touched }) => (<Form sx={AuthFormStyles}>
                     <Text variant="heading">Sign In</Text>
                     <br />
                     <Label>E-mail:</Label>

@@ -1,4 +1,4 @@
-export const AuthFormStyles = {
+export const AuthFormOuterStyles = {
     fontFamily: 'body',
     fontSize: 3,
     display: 'flex',
@@ -11,7 +11,9 @@ export const AuthFormContainerStyles = {
     justifyContent: 'center',
     height: '100vh',
 }
-
+export const AuthFormStyles = {
+    width: '20em'
+}
 export const fieldStyles = {
     padding: 2,
     bg: 'muted',
@@ -30,4 +32,15 @@ export const errorStyles = {
     alignItems: 'center',
     justifyContent: 'flex-start',
     maxWidth: '',
+}
+
+export const messageStyles = {
+    display: 'flex',
+    alignItems: 'center',
+    // justifyContent: 'center',
+    alignContent: 'center',
+    border: '1px solid black',
+    borderRadius: 'small',
+    borderWidth: 'normal',
+    borderStyle: 'solid',
 }
