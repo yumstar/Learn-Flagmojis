@@ -6,7 +6,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "@/theme";
 import { keyframes } from '@emotion/react'
-import {selectExpanded, selectLast, selectCurrent, noneExpandedOpen, someExpandedOpen, someExpandedClose, changeCurrent } from "@/features/GridSlice";
+import {selectExpanded, selectLast, selectCurrent, noneExpandedOpen, someExpandedOpen, someExpandedClose, changeCurrent } from "@/features/gridSlice";
 export default function FlagCard({name, emoji, code, childIndex}) {
     const [showInfo, setShowInfo] = useState(false)
     const [countryCode, setCountryCode] = useState(code)
