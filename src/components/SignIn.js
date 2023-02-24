@@ -4,7 +4,7 @@ import { useRef } from "react"
 import {signInInitValues, signInValidationSchema} from "../utils/validation"
 import { sendApi } from "@/utils/api"
 import { isNotEmptyString } from "../utils/string"
-import { Box, Label, Button, Text } from "theme-ui"
+import { Box, Label, Button, Text, Container, Link } from "theme-ui"
 import { AuthFormContainerStyles, AuthFormOuterStyles, AuthFormStyles, fieldStyles} from "@/styles/authenticationStyles"
 import { useRouter } from "next/router"
 import AuthError from "./AuthError"
@@ -43,6 +43,13 @@ export default function SignIn() {
                 )
                 }
             </Formik>
+            <div className="sign-in-redirect">
+                <Text variant="default">Need an account?</Text>
+                <br/>
+                <Link href="/auth/LearnerSignUp"><Text variant="link">Sign Up!</Text></Link>
+            </div>
         </div>
+        
+
     </Box>)
 }

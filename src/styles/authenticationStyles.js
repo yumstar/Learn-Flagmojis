@@ -2,7 +2,12 @@ export const AuthFormOuterStyles = {
     fontFamily: 'body',
     fontSize: 3,
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    inlineSize: 'max-content',
+    alignItems: 'center',
+    margin: 'auto'
+    // justifyContent: 'center',
+    // alignContent: 'center',
     // border: '1px solid black'
 }
 export const AuthFormContainerStyles = {
@@ -10,9 +15,10 @@ export const AuthFormContainerStyles = {
     flexDirection: 'column',
     justifyContent: 'center',
     height: '100vh',
+        // border: '2px solid black'
 }
 export const AuthFormStyles = {
-    width: '20em'
+    width: '20em',
 }
 export const fieldStyles = {
     padding: 2,

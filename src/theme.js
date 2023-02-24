@@ -40,6 +40,9 @@ export default {
       color: 'red',
       fontSize: 2,
       m:2
+    },
+    link: {
+      color: 'secondary'
     }
   },
   borderWidths: {

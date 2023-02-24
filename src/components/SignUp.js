@@ -2,7 +2,7 @@
 import { useRouter } from "next/router"
 import {signUpInitValues, signUpValidationSchema} from "../utils/validation"
 import { Formik, Form, Field, ErrorMessage } from "formik"
-import { Box, Text, Label, Button } from "theme-ui"
+import { Box, Text, Label, Button, Container } from "theme-ui"
 import {isNotEmptyString} from "../utils/string.js"
 import { fieldStyles, AuthFormOuterStyles, AuthFormContainerStyles, AuthFormStyles } from "@/styles/authenticationStyles"
 import { sendApi } from "@/utils/api"
