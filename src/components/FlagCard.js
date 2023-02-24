@@ -86,11 +86,7 @@ const countryInfoListString = (list) => {
         width: '100%',
         textAlign: 'center',
         fontSize: 5,
-        zIndex: '0'
-        // height: 
-        // borderWidth: 'thin',
-        // borderStyle: 'solid',
-        // borderColor: 'muted',
+        zIndex: '0',
 
     }
     const innerContainerStyles = {
@@ -139,17 +135,15 @@ const countryInfoListString = (list) => {
         fontFamily: 'info',
         fontSize: 3,
         opacity: '1',
-        // animation: `${fadeIn} 4s`
     }
     const labelStyles = {
         fontWeight: 'bold'
     }
-    console.log(countryInfo)
     return (
         <Box sx={containerStyles} onClick={toggleShowInfo}>
         <Container sx={innerContainerStyles}>
             <Box sx={emojiContainerStyles}>
-            <Text >{emoji}</Text>
+            <Text variant="emoji">{emoji}</Text>
             </Box>
             <Text>{name}</Text>
         </Container>

@@ -18,10 +18,8 @@ export default function SignUp() {
     try{
       const res = await sendApi(values, "/api/LearnerCreate/");
       router.push('/auth/LearnerSignIn')
-      console.log(res)
     }
     catch(error) {
-      console.log(error.response.data.message)
       setMessageType('failure')
       setMessage(error.response.data.message)
     }
@@ -62,7 +60,7 @@ export default function SignUp() {
           <ErrorMessage name="password" />
           </AuthError> }
           <br />
-          <Button variant="submit" type="submit">Submit</Button>
+          <Button variant="submit" type="submit">Sign Up</Button>
         </Form>
   )
         }

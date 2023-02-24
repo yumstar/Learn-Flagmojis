@@ -12,7 +12,6 @@ export default function SignIn() {
     const router  = useRouter()
     const handleSubmit = async (values) => {
         const res = await sendApi(values, "/api/LearnerLogin/");
-        // console.log()
         localStorage.setItem("userToken", res.data.token)
         router.push("/")
     }
@@ -38,7 +37,7 @@ export default function SignIn() {
                         <ErrorMessage name="password" />
                     </AuthError>}
                     <br />
-                    <Button variant="submit" type="submit">Submit</Button>
+                    <Button variant="submit" type="submit">Sign In</Button>
                 </Form>
                 )
                 }

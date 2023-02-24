@@ -6,7 +6,8 @@ export default {
     body: 'system-ui, sans-serif',
     heading: '"Avenir Next", sans-serif',
     monospace: 'Ubuntu Mono, monospace',
-    info: 'Poiret One, cursive'
+    info: 'Poiret One, cursive',
+    emoji: 'Noto Color Emoji, sans-serif'
   },
   colors: {
     text: '#000',
@@ -43,7 +44,10 @@ export default {
     },
     link: {
       color: 'secondary'
-    }
+    },
+    emoji: {
+      fontFamily: 'emoji'
+    } 
   },
   borderWidths: {
     thin: '0.0625em',
