@@ -22,7 +22,6 @@ export default function AppBody({ children }) {
     }
     else {
       setAuthStatus(true);
-      router.push("/");
     }
  });
 
