@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
 import { Formik, Form, Field, ErrorMessage } from "formik"
-import { useRef } from "react"
 import {signInInitValues, signInValidationSchema} from "../utils/validation"
 import { sendApi } from "@/utils/api"
 import { isNotEmptyString } from "../utils/string"

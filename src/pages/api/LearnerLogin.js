@@ -7,6 +7,8 @@ import { Learner} from '@/server/models/LearnerModel'
 import yup from 'yup'
 import jwt from 'jsonwebtoken'
 import connectToDB from '@/server/utils/connectDB'
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
 dotenv.config()
 const handler = async(req, res) => {
   if(req.method === 'POST'){
@@ -33,7 +35,7 @@ const handler = async(req, res) => {
       }
 
       const AuthToken = jwt.sign({name: learner.name, email: learner.email, password: learner.password,  id: learner._id}, process.env.PRIVATE_KEY, {expiresIn: '3d'})
-      
+      setCookie('userToken', AuthToken, { req, res, maxAge: 60 * 60 * 24 * 3 });
       res.status(200).send({data: {
         name: learner.name,
         email: learner.email,
