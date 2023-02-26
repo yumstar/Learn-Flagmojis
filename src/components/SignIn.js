@@ -11,7 +11,8 @@ export default function SignIn() {
     const router  = useRouter()
     const handleSubmit = async (values) => {
         const res = await sendApi(values, "/api/LearnerLogin/");
-        localStorage.setItem("userToken", res.data.token)
+        // localStorage.setItem("userToken", res.data.token)
+        // console.log(res)
         router.push("/")
     }
 

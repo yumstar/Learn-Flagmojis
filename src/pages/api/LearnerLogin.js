@@ -8,7 +8,7 @@ import yup from 'yup'
 import jwt from 'jsonwebtoken'
 import connectToDB from '@/server/utils/connectDB'
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
+import {setCookie} from 'cookies-next';
 dotenv.config()
 const handler = async(req, res) => {
   if(req.method === 'POST'){
@@ -34,12 +34,12 @@ const handler = async(req, res) => {
         return res.status(401).send({message: 'Email or password is incorrect. Please try again!'})
       }
 
-      const AuthToken = jwt.sign({name: learner.name, email: learner.email, password: learner.password,  id: learner._id}, process.env.PRIVATE_KEY, {expiresIn: '3d'})
-      setCookie('userToken', AuthToken, { req, res, maxAge: 60 * 60 * 24 * 3 });
+      const AuthToken = jwt.sign({name: learner.name, email: learner.email,  id: learner._id}, process.env.PRIVATE_KEY, {expiresIn: '3d'})
+      setCookie('userToken', AuthToken, { req, res, maxAge: 60 * 60 * 24 * 3});
       res.status(200).send({data: {
         name: learner.name,
         email: learner.email,
-      }, token: AuthToken, message: 'Logged In!'})
+      }, message: 'Logged In!'})
     }
     catch(error) {
       res.status(400).send({message: "Error"})

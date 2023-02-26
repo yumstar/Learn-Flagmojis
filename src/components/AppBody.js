@@ -7,14 +7,14 @@ import { Provider } from 'react-redux'
 import store from "@/app/store"
 import { Spinner } from "theme-ui";
 import { useState, useEffect } from "react"
+import { deleteCookie, hasCookie, setCookie } from "cookies-next"
 export default function AppBody({ children }) {
- var token;
  const [authStatus, setAuthStatus] = useState(false);
  const router = useRouter();
  useEffect(() => {
    const authPath = new RegExp('\/auth\/.*');
-   token = window.localStorage.getItem("userToken");
-   if(!token) {
+   // token = window.localStorage.getItem("userToken");
+   if(!hasCookie('userToken')) {
       setAuthStatus(false);
       if(!authPath.test(window.location.pathname)) {
          router.push('/auth/LearnerSignIn')
@@ -28,9 +28,12 @@ export default function AppBody({ children }) {
 //  useEffect(() => {getLearnerPaths()}, [])
 
 const handleAuthOperation = (e) => {
-      token = window.localStorage.getItem("userToken");
-      if(token) {
-         window.localStorage.removeItem("userToken");
+      // token = window.localStorage.getItem("userToken");
+      // if(token) {
+      //    window.localStorage.removeItem("userToken");
+      // }
+      if(hasCookie('userToken')) {
+         deleteCookie('userToken')
       }
       router.reload();
       router.push("/auth/LearnerSignIn")
