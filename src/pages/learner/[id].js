@@ -1,11 +1,14 @@
-import { getLearnerPaths } from "@/utils/api"
+import { getLearnerPaths, getData, getLearnerInfo } from "@/utils/api"
 import AppBody from "@/components/AppBody";
 import { Container } from "theme-ui";
-export default function Learner({ learnerId }) {
+import http from 'http'
+import { Learner } from "@/server/models/LearnerModel";
+import PersonalInfo from "@/components/AccountInfo";
+export default function LearnerInfo({ learnerId, userDataObj }) {
     return (
     <AppBody>
         <Container>
-        <p>learnerId</p>
+          <PersonalInfo name={userDataObj.name} email={userDataObj.email}/>
         </Container>
     </AppBody>)
 }
@@ -29,9 +32,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
    const learnerId = params.id;
+   let userData = await getLearnerInfo(learnerId);
+   let userDataObj = userData.toJSON();
+   delete userDataObj["password"]
+   userDataObj = {...userDataObj, _id: userDataObj._id.toString()}
    return {
     props: {
-      learnerId
+      learnerId,
+      userDataObj
     }
    }
   }
