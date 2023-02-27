@@ -1,15 +1,16 @@
 import { getLearnerPaths, getData, getLearnerInfo } from "@/utils/api"
 import AppBody from "@/components/AppBody";
-import { Container } from "theme-ui";
+import { Container, Box } from "theme-ui";
 import http from 'http'
 import { Learner } from "@/server/models/LearnerModel";
+import { accountInfoComponentStyles } from "@/styles/PageLearnerStyles";
 import PersonalInfo from "@/components/AccountInfo";
 export default function LearnerInfo({ learnerId, userDataObj }) {
     return (
     <AppBody>
-        <Container>
+        <Box className="learner-page" sx={accountInfoComponentStyles} >
           <PersonalInfo name={userDataObj.name} email={userDataObj.email}/>
-        </Container>
+        </Box>
     </AppBody>)
 }
 

@@ -1,11 +1,23 @@
-import { Container, Text } from "theme-ui"
+import { Container, Box, Text } from "theme-ui"
+import { accountInfoContainerStyles, accountInfoHeadingContainerStyles, accountInfoLabelStyles, accountInfoStyles, accountInfoValueStyles } from "@/styles/accountStyles"
 export default function AccountInfo({name, email}) {
     return (
     <>
-        <Container>
-        <Text>{name}</Text>
-        <Text>{email}</Text>
+        <Box className="account-info" sx={accountInfoContainerStyles}>
+        <Container className="account-info-heading" sx={accountInfoHeadingContainerStyles}>
+        <Text variant="cardHeading" sx>Account Info</Text>
         </Container>
+        <Container sx={accountInfoStyles}>
+        <Box>
+            <Text sx={accountInfoLabelStyles}>Learner:</Text>
+            <Text sx={accountInfoValueStyles}>{name}</Text>
+        </Box>
+        <Box>
+            <Text sx={accountInfoLabelStyles}>Email:</Text>
+            <Text sx={accountInfoValueStyles}>{email}</Text>
+        </Box>
+        </Container>
+        </Box>
     </>
     )
     

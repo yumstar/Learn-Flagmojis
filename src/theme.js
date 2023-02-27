@@ -13,8 +13,12 @@ export default {
     text: '#000',
     background: '#eff7f6',
     primary: '#A2D2FF',
+    primaryBackground: '#a2d2ff7a',
     secondary: '#CDB4DB',
+    secondaryText: '#cdb4dbbd',
+    // secondaryText: '#cdb4db96',
     accent: '#FFC8DD',
+    accentText: "#ffc8ddd9",
     highlight: '#BDE0FE',
     muted: '#D3D3D3',
     red: '#FF595E',
@@ -29,9 +33,20 @@ export default {
       fontSize: 3
     },
     heading: {
+      fontFamily: 'heading',
+      display: 'block',
       color: 'accent',
       fontSize: 4,
       textDecoration: 'underline'
+    },
+    cardHeading: {
+      fontFamily: 'heading',
+      color: 'background',
+      fontSize: 4,
+      display: 'block',
+      textDecoration: 'underline',
+      textAlign: 'center',
+      my: 3
     },
     validationError: {
       color: 'red',
