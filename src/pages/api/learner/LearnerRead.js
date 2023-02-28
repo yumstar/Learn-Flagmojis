@@ -15,7 +15,7 @@ const handler = async(req, res) => {
           res.status(500).send({message: "Error"})
         }
         const userId = decoded.id;
-        Learner.findOne({_id: userId}).then((learner) => { return res.status(200).json({name: learner.name, email: learner.email})})
+        Learner.findOne({_id: userId}).then((learner) => { return res.status(200).json({name: learner.name, email: learner.email, id: learner._id})})
         .catch((error) => { return res.status(400).json({message: "error"})})
       })
       // res.status(200).send(userToken)
