@@ -1,5 +1,6 @@
 import styles from "../styles/AppBody.module.css"
 import { useRouter } from "next/router"
+import Link from "next/link"
 /** @jsxImportSource theme-ui */
 import { ThemeProvider, Container, Button } from 'theme-ui'
 import  theme  from '../theme.js'
@@ -34,18 +35,21 @@ const handleAuthOperation = (e) => {
       // }
       if(hasCookie('userToken')) {
          deleteCookie('userToken')
+         setAuthStatus(false)
       }
       router.reload();
       router.push("/auth/LearnerSignIn")
 }
-
  return  (
     <Provider store={store}>
     <ThemeProvider theme={theme}>
     <div>
     <Container sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
     <h1 sx={{color: 'primary', fontFamily: 'heading'}}>Flagmojis</h1>
+    </Container>
+    <Container sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
     <Button variant="primary" sx={{mx: 3}} onClick={handleAuthOperation}>{authStatus? "Log out": "Log in"}</Button>
+    <Link href="/learner/Account/"><Button variant="primary" sx={{mx: 3, display: authStatus? "inline": "none"}}>My Account</Button></Link>
     </Container>
     <main>
     {children? children: <Spinner sx={{color: 'accent'}}/>}
