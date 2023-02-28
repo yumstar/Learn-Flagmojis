@@ -3,8 +3,8 @@ import AppBody from "@/components/AppBody";
 import { Container, Box, Button } from "theme-ui";
 import Link from "next/link";
 import { accountInfoComponentStyles } from "@/styles/PageLearnerStyles";
-import PersonalInfo from "@/components/AccountInfo";
-export default function LearnerInfo({ learnerId, userDataObj }) {
+import PersonalInfo from "@/components/PersonalInfo";
+export default function LearnerInfoContainer({ learnerId, userDataObj }) {
     return (
         <Box className="learner-page" sx={accountInfoComponentStyles} >
           <PersonalInfo name={userDataObj.name} email={userDataObj.email}/>

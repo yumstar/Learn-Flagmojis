@@ -2,7 +2,7 @@ import { Box, Spinner } from "theme-ui"
 import AppBody from "@/components/AppBody"
 import { accountInfoComponentStyles } from "@/styles/PageLearnerStyles"
 import { useState, useEffect } from "react";
-import LearnerInfo from "@/components/LearnerInfo";
+import LearnerInfoContainer from "@/components/LearnerInfoContainer";
 import { getData } from "@/utils/api";
 export default function Account(props) {
     const [userData, setuserData] = useState(null);
@@ -20,7 +20,7 @@ export default function Account(props) {
     return    ( <AppBody>
     <Box className="learner-page" sx={accountInfoComponentStyles} >
       {!userData && <Spinner sx={{color: 'accent'}}/>}
-      {userData && <LearnerInfo userDataObj={userData}/>}
+      {userData && <LearnerInfoContainer userDataObj={userData}/>}
 
     </Box>
 </AppBody>)

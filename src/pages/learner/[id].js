@@ -1,14 +1,14 @@
 import { getLearnerPaths, getData, getLearnerInfo } from "@/utils/api"
 import AppBody from "@/components/AppBody";
 import { Container, Box } from "theme-ui";
-import http from 'http'
 import { Learner } from "@/server/models/LearnerModel";
 import { accountInfoComponentStyles } from "@/styles/PageLearnerStyles";
-import PersonalInfo from "@/components/AccountInfo";
+import PersonalInfo from "@/components/PersonalInfo";
+import LearnerInfoContainer from "@/components/LearnerInfoContainer";
 export default function LearnerInfo({learnerId, userDataObj }) {
     return (
     <AppBody>
-      <LearnerInfo userDataObj={userDataObj}/>
+      <LearnerInfoContainer userDataObj={userDataObj}/>
     </AppBody>)
 }
 
