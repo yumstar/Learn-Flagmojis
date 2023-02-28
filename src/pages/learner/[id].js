@@ -5,7 +5,7 @@ import http from 'http'
 import { Learner } from "@/server/models/LearnerModel";
 import { accountInfoComponentStyles } from "@/styles/PageLearnerStyles";
 import PersonalInfo from "@/components/AccountInfo";
-export default function LearnerInfo({userDataObj }) {
+export default function LearnerInfo({learnerId, userDataObj }) {
     return (
     <AppBody>
       <LearnerInfo userDataObj={userDataObj}/>
@@ -30,6 +30,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  const learnerId = params.id
    let userData = await getLearnerInfo(learnerId);
    let userDataObj = userData.toJSON();
    delete userDataObj["password"]
