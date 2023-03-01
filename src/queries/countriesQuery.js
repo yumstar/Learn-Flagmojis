@@ -1,3 +1,4 @@
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 export const countriesQuery = () => {
     return {
         query: `
@@ -14,7 +15,7 @@ export const countriesQuery = () => {
 export const countryInfoQuery = (id) => {
     return {
         query: `
-        query queryCountriesInfo{
+        query queryCountryInfo{
             country(code: "${id}")  {
                code
                native
@@ -34,4 +35,32 @@ export const countryInfoQuery = (id) => {
            }
         `
     }
+}
+
+export const countryAttributeQuery = (id, attribute) => {
+  let attributeFragment;
+  switch(attribute) {
+    case 'name':
+    case 'native':
+    case 'capital':
+    case 'currency':
+    case 'phone':
+      attributeFragment = `${attribute}`
+      break;
+    case "continent": case "states": case "languages":
+      attributeFragment = `${attribute} {
+        name
+      }`
+      break;
+    default:
+      attributeFragment = "code"
+  }
+  const fullQuery = `
+  query queryCountryAttribute {
+    country(code: "${id}") {
+      ${attributeFragment}
+    }
+  }
+  `
+  return {query: gql`${fullQuery}` }
 }
