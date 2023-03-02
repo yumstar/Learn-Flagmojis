@@ -40,6 +40,7 @@ export const countryInfoQuery = (id) => {
 export const countryAttributeQuery = (id, attribute) => {
   let attributeFragment;
   switch(attribute) {
+    case 'emoji':
     case 'name':
     case 'native':
     case 'capital':
