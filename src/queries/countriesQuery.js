@@ -37,6 +37,14 @@ export const countryInfoQuery = (id) => {
     }
 }
 
+export const countryCodesQuery = () => {
+  return {query: gql`query queryCountryCodes {
+    countries {
+      code
+    }
+  }`}
+}
+
 export const countryAttributeQuery = (id, attribute) => {
   let attributeFragment;
   switch(attribute) {

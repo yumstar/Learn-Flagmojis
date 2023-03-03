@@ -1,3 +1,6 @@
+import { countryCodesQuery } from '@/queries/countriesQuery';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+
 export const createQuestionStatement = (type, flag) => {
     switch(type) {
         case "name": case 0: 
@@ -28,3 +31,23 @@ export const createQuestionStatement = (type, flag) => {
             return ""
     }
 }
+
+// export const createQuestionOptions = async (type, id, answers) => {
+//     var options = answers;
+//     const client = new ApolloClient({
+//         uri: 'https://countries.trevorblades.com/graphql',
+//         cache: new InMemoryCache(),
+//       });
+//     var codes;
+//     await client.query(countryCodesQuery()).then((res) => {codes = res});
+//     // const codes = codesQuery;
+//     // while(options.length < 4){
+//     //     const codeNum = Math.floor(Math.random(0, codes.length) * codes.length);
+//     //     const code = codes[codeNum];
+//     //     if(code == id) {
+//     //         break;
+//     //     }
+//     //     options.push(code);
+//     // }
+//     return codes;
+// }
