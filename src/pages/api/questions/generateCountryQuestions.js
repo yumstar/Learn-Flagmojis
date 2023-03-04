@@ -36,7 +36,6 @@ const handler = async (req, res) => {
                             case "string":
                                 options.push(resData);
                                 break;
-                                // questionsChosen.push({ type: typeString, question: createQuestionStatement(typeString, emoji), answers: [resData] })
                             case "object":
                                 if (Array.isArray(resData)) {
                                     var hasNonNullItems = resData.length > 0;
@@ -46,8 +45,6 @@ const handler = async (req, res) => {
                                     })
                                     if (hasNonNullItems) {
                                         options = resData.map((answer) => answer["name"]);
-                                        // options.push(answerList)
-                                        // questionsChosen.push({ type: typeString, question: createQuestionStatement(typeString, emoji), answers: resData.map((answer) => answer["name"]) })
                                     };
                                 }
                                 else {
@@ -55,7 +52,6 @@ const handler = async (req, res) => {
                                     resDataDataType = typeof resData
                                     if (resDataDataType != 'undefined' && resData !== null) {
                                         options.push(resData)
-                                        // questionsChosen.push({ type: typeString, question: createQuestionStatement(typeString, emoji), answers: [resData] })
                                     }
                                 }
                                 break;
@@ -78,10 +74,13 @@ const handler = async (req, res) => {
                             var optionResDataDataType = typeof optionResData
 
                             if (optionResDataDataType != 'undefined' && optionResData !== null) {
+                                if (options)
                                 switch (optionResDataDataType) {
                                     case "string":
-                                        console.log(optionResData)
-                                        options.push(optionResData)
+                                        if(!options.includes(optionResData)) {
+                                            options.push(optionResData)
+                                        }
+                                        
                                         break;
                                     case "object":
                                         if (Array.isArray(optionResData)) {
@@ -91,16 +90,17 @@ const handler = async (req, res) => {
                                             if (isNonNullItems) {
                                                 // var answerList = resData.map((answer) => answer["name"]);
                                                 optionResDataItem = optionResDataItem["name"]
-                                                options.push(optionResDataItem)
-                                                // questionsChosen.push({ type: typeString, question: createQuestionStatement(typeString, emoji), answers: resData.map((answer) => answer["name"]) })
+                                                if(!options.includes(optionResDataItem)){
+                                                    options.push(optionResDataItem)
+                                                }
+                                                
                                             };
                                         }
                                         else {
                                            optionResData = optionResData["name"]
                                             optionResDataDataType = typeof optionResData
-                                            if (optionResDataDataType != 'undefined' && optionResData !== null) {
+                                            if (optionResDataDataType != 'undefined' && optionResData !== null && !options.includes(optionResData)) {
                                                 options.push(optionResData)
-                                                // questionsChosen.push({ type: typeString, question: createQuestionStatement(typeString, emoji), answers: [resData] })
                                             }
                                         }
                                         break;                                   
