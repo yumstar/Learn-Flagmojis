@@ -77,18 +77,75 @@ mongoose.connect(process.env.LEARN_DB_URI).then(async (res) => {
       cache: new InMemoryCache(),
     });
     var countriesInfo = []
-    await client.query(allCountriesNamedInfoQuery()).then(async (res) => { 
+    await client.query(allCountriesNamedInfoQuery()).then(async (res) => {
       countriesInfo = res.data.countries;
       // console.log(countriesInfo)
-      for(var i = 0; i < countriesInfo.length; i++){
+      for (var i = 0; i < countriesInfo.length; i++) {
         var currentCountry = countriesInfo[i]
-       var countryInfo = await queryCountry(currentCountry)
-       if(!countryInfo){
-       await CountryQuestionList.create({country: {code: currentCountry.code}})
-       }
-      //  console.log(country)
+        var countryModel = await queryCountry(currentCountry)
+        if (!countryModel) {
+          countryModel = await CountryQuestionList.create({ country: { code: currentCountry.code } })
+        }
+        var questionList = countryModel.list
+        // console.log(questionList)
+        var fields = Object.getOwnPropertyNames(currentCountry).filter(field => field != '__typename' && field != 'code')
+        const countryCode = currentCountry["code"];
+        for (var j = 0; j < fields.length; j++) {
+
+          const field = fields[j]
+          var answer = currentCountry[field];
+          var answerDataType = typeof answer;
+          if (answerDataType != 'undefined' && answer != null) {
+
+            switch (answerDataType) {
+              case "string":
+                if (questionList.find((question) => question.code == countryCode && question.type == field)) {
+                  const questionIndex = questionList.findIndex((question) => { question.code == countryCode && question.type == field })
+                  questionList[questionIndex] = { ...questionList[questionIndex], type: answerDataType }
+                }
+                else {
+                  questionList.push({ code: countryCode, type: field, answerType: answerDataType })
+                }
+                // countryModel.findOneAndUpdate({'country.code': countryCode}, {list: [...countryModel.list, {code: countryCode, type: field, answerType: answerDataType}]});
+                break;
+              case "object":
+                if (Array.isArray(answer)) {
+                  var hasNonNullItems = answer.length > 0
+                  answer.forEach((item) => {
+                    hasNonNullItems = hasNonNullItems && !(typeof item == 'undefined' || item == null) && !(typeof item['name'] == 'undefined' || item['name'] == null)
+                  })
+                  if (hasNonNullItems) {
+                    if (questionList.find((question) => question.code == countryCode && question.type == field)) {
+                      const questionIndex = questionList.findIndex((question) => { question.code == countryCode && question.type == field })
+                      questionList[questionIndex] = { ...questionList[questionIndex], type: "array" }
+                    }
+                    else {
+                      questionList.push({ code: countryCode, type: field, answerType: "array" })
+                    }
+                  }
+                }
+                else {
+                  answer = answer["name"]
+                  const objAnswerDataType = typeof answer
+                  if (objAnswerDataType != 'undefined' && answer != null) {
+                    if (questionList.find((question) => question.code == countryCode && question.type == field)) {
+                      const questionIndex = questionList.findIndex((question) => { question.code == countryCode && question.type == field })
+                      questionList[questionIndex] = { ...questionList[questionIndex], type: answerDataType }
+                    }
+                    else {
+                      questionList.push({ code: countryCode, type: field, answerType: answerDataType })
+                    }
+                  }
+                }
+                break;
+
+            }
+          }
+
+          // console.log(answer)
+        }
+        await CountryQuestionList.findOneAndUpdate({'country.code': countryCode}, {list: questionList})
       }
-      // countriesInfo.forEach(queryCountry)
       process.exit()
     })
 
@@ -100,27 +157,12 @@ mongoose.connect(process.env.LEARN_DB_URI).then(async (res) => {
 
 const queryCountry = async (country) => {
   try{
-    const codename = country.code
-    const countryInfo = await CountryQuestionList.findOne({'country.code': codename}).exec()
+    const countryCode = country.code
+    const countryInfo = await CountryQuestionList.findOne({'country.code': countryCode}).exec()
     return countryInfo
-    // .then((doc) => {
-    //   // console.log(doc)
-    // })
-    // console.log(countryInfo)  
   }
   catch(error) {
     console.log(error)
   }
 
 }
-// const createQuestionDatabase = async() => {
-//     const client = new ApolloClient({
-//       link: new HttpLink({uri: 'https://countries.trevorblades.com/graphql', fetch}),
-//         cache: new InMemoryCache(),
-//       });
-
-// client.query(allCountriesNamedInfoQuery()).then((res) => console.log(res.data))
-// }
-
-
-// module.exports = createQuestionDatabase
