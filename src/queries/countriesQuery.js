@@ -63,6 +63,32 @@ export const countryNamedInfoQuery = (code) => {
   }
 }
 
+export const allCountriesNamedInfoQuery = () => {
+  return {
+      query: gql`
+      query queryAllCountriesNamedInfo{
+          countries {
+             name
+             code
+             native
+             phone
+             continent {
+               name
+             }
+             capital
+             currency
+             languages {
+               name
+             }
+             states {
+               name
+             }
+           }
+         }
+      `
+  }
+}
+
 export const countryCodesQuery = () => {
   return {query: gql`query queryCountryCodes {
     countries {
