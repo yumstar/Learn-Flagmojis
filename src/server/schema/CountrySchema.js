@@ -6,5 +6,3 @@ export const countrySchema = new mongoose.Schema({
         required: true,
     }
 })
-
-export const Country = mongoose.model('Country', countrySchema)

@@ -1,6 +1,5 @@
-import mongoose from 'mongoose'
 import { questionSchema } from '../schema/QuestionSchema.js'
-export const questionResultSchema = mongoose.Schema({
+export const questionResultSchema = new mongoose.Schema({
     user: {
         type: String,
         required: true,
@@ -14,5 +13,3 @@ export const questionResultSchema = mongoose.Schema({
         required: true
     }
 })
-
-export const QuestionResult = mongoose.model('QuestionResult', questionResultSchema)
