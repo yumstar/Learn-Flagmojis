@@ -113,7 +113,7 @@ const handler = async(req, res) => {
                 var questionResult = await QuestionResult.findOne({user: userEmail, 'question.code': currentResult.code, 'question.type': currentResult.type, 'question.answerType': currentResult.givenAnswerType})
                 if(questionResult){
                     const bestResult = questionResult.result;
-                    if(bestResult > currentResult.points){
+                    if(currentResult.points > bestResult){
                         questionResult = await QuestionResult.findOneAndUpdate({user: userEmail, 'question.code': currentResult.code, 'question.type': currentResult.type, 'question.answerType': currentResult.givenAnswerType}, {result: currentResult.points})
                     }
                                    
