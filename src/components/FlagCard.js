@@ -12,8 +12,8 @@ export default function FlagCard({name, emoji, code, childIndex}) {
     const [countryCode, setCountryCode] = useState(code)
     const [countryInfo, setCountryInfo] = useState({})
     const dispatch = useDispatch()
-    const expanded = useSelector((state) => state.grid.itemExpanded)
-    const lastExpanded = useSelector((state) => state.grid.lastItemExpanded)
+    // const expanded = useSelector((state) => state.grid.itemExpanded)
+    // const lastExpanded = useSelector((state) => state.grid.lastItemExpanded)
     const currentExpanded = useSelector((state) => state.grid.currentItemExpanded)
 
     const toggleShowInfo = (e) => {

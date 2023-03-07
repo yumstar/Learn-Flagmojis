@@ -9,13 +9,9 @@ export default function Account(props) {
     const getUserData = async() => {
         const res = await getData("/api/learner/LearnerRead");
         setuserData(res)
-        // return res;
     }
     useEffect(() => {
         getUserData()
-        // .then((res) => {setuserData(res); console.log(res)})
-        // setuserData(userDataRes)
-        // console.log(userDataRes)
     }, []);
     return    ( <AppBody>
     <Box className="learner-page" sx={accountInfoComponentStyles} >

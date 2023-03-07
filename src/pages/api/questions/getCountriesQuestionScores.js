@@ -39,10 +39,6 @@ const handler = async (req, res) => {
                         var questionListLength = ((await CountryQuestionList.findOne({'country.code': code})).list).length
                         scores[i] = {...scores[i], totalQuestions: questionListLength}
                     }
-                    // scores.forEach((score) => {
-                    //     const code = score.countryCode;
-                    //     var questionListLength = ((await CountryQuestionList.findOne({'country.code': id})).list).length
-                    // }) 
                     
                    res.status(200).send(scores)
 

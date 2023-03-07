@@ -1,9 +1,9 @@
 import { Container, Box, Text } from "theme-ui"
-import { accountInfoContainerStyles, accountInfoHeadingContainerStyles, accountInfoLabelStyles, accountInfoStyles, accountInfoValueStyles } from "@/styles/accountStyles"
+import { personalInfoContainerStyles, accountInfoHeadingContainerStyles, accountInfoLabelStyles, accountInfoStyles, accountInfoValueStyles } from "@/styles/accountStyles"
 export default function AccountInfo({name, email}) {
     return (
     <>
-        <Box className="account-info" sx={accountInfoContainerStyles}>
+        <Box className="account-info" sx={personalInfoContainerStyles}>
         <Container className="account-info-heading" sx={accountInfoHeadingContainerStyles}>
         <Text variant="cardHeading" sx>Account Info</Text>
         </Container>

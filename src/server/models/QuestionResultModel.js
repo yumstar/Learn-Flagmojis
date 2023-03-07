@@ -15,4 +15,5 @@ export const questionResultSchema = mongoose.Schema({
     }
 })
 
+mongoose.models = {};
 export const QuestionResult = mongoose.model('QuestionResult', questionResultSchema)

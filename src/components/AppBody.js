@@ -9,6 +9,7 @@ import store from "@/app/store"
 import { Spinner } from "theme-ui";
 import { useState, useEffect } from "react"
 import { deleteCookie, hasCookie, setCookie } from "cookies-next"
+
 export default function AppBody({ children }) {
  const [authStatus, setAuthStatus] = useState(false);
  const router = useRouter();
@@ -27,7 +28,7 @@ export default function AppBody({ children }) {
     }
  });
 
-//  useEffect(() => {getLearnerPaths()}, [])
+
 
 const handleAuthOperation = (e) => {
       // token = window.localStorage.getItem("userToken");

@@ -4,6 +4,7 @@ import axios from "axios";
 import{ countriesQuery }  from "@/queries/countriesQuery";
 import FlagCard from "./FlagCard";
 import { Spinner } from "theme-ui";
+
 export default function FlagGrid() {
     const styles = {
         width: '100%',

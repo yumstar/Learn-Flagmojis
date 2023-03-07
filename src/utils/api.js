@@ -8,14 +8,6 @@ export const sendApi = async (data, uri) => {
     return await axios.post(uri, data)
 }
 export const getData = async (uri) => {
-//     var response;
-//     const responses = await http.get({
-//         hostname: 'localhost',
-//         port: 3000,
-//         path: uri,
-//         agent: false
-//     }, (res) => {response = res;})
-//     return responses
 const res = await axios.get(uri);
 return res.data;
 }

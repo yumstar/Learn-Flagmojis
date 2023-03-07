@@ -11,12 +11,11 @@ import { getCookie, hasCookie } from "cookies-next"
 const handler = async(req, res) => {
     if(req.method == 'POST') {
     try{
-        // var userToken = req.body.token
         const userToken = getCookie("userToken", {req, res});
         var userEmail;
         jwt.verify(userToken, process.env.PRIVATE_KEY, async (err, decoded) => {
             if(err){
-                return res.status(500).send({message: "Invalid token"})
+                return res.status(400).send({message: "Invalid token"})
             }
             const userId = decoded.id;
             
@@ -90,7 +89,6 @@ const handler = async(req, res) => {
                                 answer = answer["name"]
                                 answerDataType = typeof answer
                                 if (answerDataType != 'undefined' && answer !== null && !results.find((result) => result.type == question.type)) {
-                                    // options.push(resData)
                                     results.push({learner: userEmail, code: id, type: question.type, points: question.answer == answer? 1: 0, givenAnswerType: "object"})
                                     
                                 }

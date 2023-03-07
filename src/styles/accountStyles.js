@@ -24,9 +24,24 @@ export const accountInfoValueStyles = {
     fontFamily: 'body'
 }
 
-export const accountInfoContainerStyles = {
-    maxWidth: 2,
+export const personalInfoContainerStyles = {
+    maxWidth: 3,
+    width: '24em',
     // mx: 'auto',
+    // flex: 2,
+    borderWidth: 'thin',
+    borderColor: 'highlight', 
+    borderStyle: 'solid',
+    borderRadius: 'large',
+    backgroundColor: 'primaryBackground',
+} 
+
+export const scoreInfoContainerStyles = {
+    maxWidth: 3,
+    width: '30em',
+    // mx: 'auto',
+    flex: 2,
+    ml: 4,
     borderWidth: 'thin',
     borderColor: 'highlight', 
     borderStyle: 'solid',
