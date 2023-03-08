@@ -157,3 +157,35 @@ export const countryMultiAttributeQuery = (id, attributes) => {
   `
   return {query: gql`${fullQuery}` }
 }
+
+export const countryMultiAttributeFetchQuery = (id, attributes) => {
+  let attributeFragment = ``;
+  attributes.forEach((attribute) => {
+    switch(attribute) {
+      case 'emoji':
+      case 'name':
+      case 'native':
+      case 'capital':
+      case 'currency':
+      case 'phone':
+        attributeFragment +=( `${attribute}` + "\n")
+        break;
+      case "continent": case "states": case "languages":
+        attributeFragment += (`${attribute} {
+          name
+        }` + "\n")
+        break;
+      default:
+        break;
+    }
+  })
+
+  const fullQuery = `
+  query queryCountryAttribute {
+    country(code: "${id}") {
+      ${attributeFragment}
+    }
+  }
+  `
+  return {query: `${fullQuery}`}
+}
