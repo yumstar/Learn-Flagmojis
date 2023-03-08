@@ -4,7 +4,7 @@ import { Container, Box, Button, Text } from "theme-ui";
 import Link from "next/link";
 import { accountInfoComponentStyles } from "@/styles/PageLearnerStyles";
 import PersonalInfo from "@/components/PersonalInfo";
-import ScoreInfo from "./ScoreInfo";
+import ScoreInfo from "@/components/ScoreInfo";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useState } from "react";
 export default function LearnerInfoContainer({ userDataObj }) {

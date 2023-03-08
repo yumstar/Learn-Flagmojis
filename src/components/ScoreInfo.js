@@ -42,7 +42,7 @@ export default function ScoreInfo({name, email}) {
         </Container>
         <Container sx={accountInfoStyles}>
         <Box>
-            {quizScores.length > 0 && quizScores.map((score) => {return <CountryScore score={score} />})}
+            {quizScores.length > 0 && quizScores.map((score, index) => {return <CountryScore key={index} score={score} />})}
         </Box>
         {/* <Box>
             <Text sx={accountInfoLabelStyles}>Learner:</Text>
