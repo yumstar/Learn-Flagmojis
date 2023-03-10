@@ -42,6 +42,7 @@ export default function ScoreInfo({name, email}) {
         </Container>
         <Container sx={accountInfoStyles}>
         <Box>
+            {quizScores.length < 1 && <Text variant="body">No scores to display yet!</Text>}
             {quizScores.length > 0 && quizScores.map((score, index) => {return <CountryScore key={index} score={score} />})}
         </Box>
         {/* <Box>

@@ -1,4 +1,4 @@
-import { Container, Box, Text, Spinner } from "theme-ui"
+import { Container, Box, Text, Spinner, Button } from "theme-ui"
 import {Collapse} from 'react-collapse';
 import { useCallback, useState, useEffect } from "react";
 import { countryInfoQuery } from "@/queries/countriesQuery";
@@ -6,6 +6,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "@/theme";
 import { keyframes } from '@emotion/react'
+import Link from "next/link";
 import {selectExpanded, selectLast, selectCurrent, noneExpandedOpen, someExpandedOpen, someExpandedClose, changeCurrent } from "@/features/gridSlice";
 export default function FlagCard({name, emoji, code, childIndex}) {
     const [showInfo, setShowInfo] = useState(false)
@@ -157,7 +158,7 @@ const countryInfoListString = (list) => {
            {countryInfo && countryInfo.languages && countryInfo.languages.length > 0  && <Box><Text sx={labelStyles}>Languages:</Text> <Text>{`${countryInfoListString(countryInfo.languages.slice(0, 3))}`}<br/></Text></Box>}
            {countryInfo && countryInfo.currency && <Box><Text sx={labelStyles}>Currency:</Text> <Text>{`${countryInfo.currency}`}<br/></Text></Box>}
            {countryInfo && countryInfo.phone && <Box><Text sx={labelStyles}>Phone Code:</Text> <Text>{`+${countryInfo.phone}`}<br/></Text></Box>}
-          
+           {countryInfo && <Box><Button><Link href={`/quizzes/country/${code}`}>Quiz me!</Link></Button></Box>}
           
         </Container>
         </Container>

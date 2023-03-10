@@ -54,7 +54,7 @@ const handleAuthOperation = (e) => {
     <Link href="/learner/Account/"><Button variant="primary" sx={{mx: 3, cursor: 'pointer', display: authStatus? "inline": "none"}}>My Account</Button></Link>
     </Container>
     <main>
-    {children? children: <Spinner sx={{color: 'accent'}}/>}
+    {children? children: <Spinner sx={{color: 'accent', display: 'block', margin: 'auto'}}/>}
     </main>
     </div>
     </ThemeProvider>

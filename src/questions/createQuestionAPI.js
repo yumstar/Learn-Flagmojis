@@ -25,29 +25,9 @@ export const createQuestionStatement = (type, flag) => {
             return `What currency is used in ${flag}?`
             break;
         case "phone": case 7:
-            return `What phone code do phone numbers from ${flag} use?`
+            return `What phone code(s) do phone numbers from ${flag} use?`
             break;
         default:
             return ""
     }
 }
-
-// export const createQuestionOptions = async (type, id, answers) => {
-//     var options = answers;
-//     const client = new ApolloClient({
-//         uri: 'https://countries.trevorblades.com/graphql',
-//         cache: new InMemoryCache(),
-//       });
-//     var codes;
-//     await client.query(countryCodesQuery()).then((res) => {codes = res});
-//     // const codes = codesQuery;
-//     // while(options.length < 4){
-//     //     const codeNum = Math.floor(Math.random(0, codes.length) * codes.length);
-//     //     const code = codes[codeNum];
-//     //     if(code == id) {
-//     //         break;
-//     //     }
-//     //     options.push(code);
-//     // }
-//     return codes;
-// }

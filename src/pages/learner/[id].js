@@ -39,6 +39,7 @@ export async function getStaticProps({ params }) {
     props: {
       learnerId,
       userDataObj
-    }
+    },
+    revalidate: 60
    }
   }

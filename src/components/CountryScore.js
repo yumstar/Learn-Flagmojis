@@ -13,21 +13,21 @@ export default function CountryScore({score}) {
     // const error = useSelector(selectError)
     // const errorMessage = useSelector(selectErrorMessage)
     useEffect(() => {
-        console.log(countries)
         if(!countries.find(country => country.code == score.countryCode)){
             dispatch(addCountry(score.countryCode))
         }
         const getEmoji = async() => {
             dispatch(getCountryAttributes(score.countryCode, ["emoji"]))
         }
-        getEmoji();
-        const index = countries.findIndex(country => country.code == score.countryCode)
-        setCountry(countries[index])
-        setEmoji(country.emoji)
+        getEmoji().then(() =>{
+            const index = countries.findIndex(country => country.code == score.countryCode)
+            setCountry(countries[index])
+            setEmoji(country.emoji)
+        });
+
     }, []);
-    console.log(emoji)
     return (<>
-    <Text variant="emoji" sx={{margin: 1, fontSize: 3}}>{emoji.length > 0? emoji:score.countryCode}:</Text>
+    <Text variant="emoji" sx={{margin: 1, fontSize: 3}}>{emoji && emoji.length > 0? emoji:score.countryCode}:</Text>
     <Text sx={{...accountInfoValueStyles, fontSize: 3}}>{score.score} / {score.totalQuestions}</Text>
     </>
     )
