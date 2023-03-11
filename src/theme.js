@@ -16,16 +16,18 @@ export default {
     primaryBackground: '#a2d2ff7a',
     secondary: '#CDB4DB',
     secondaryText: '#cdb4dbbd',
-    // secondaryText: '#cdb4db96',
+    secondaryBackground: "#cdb4db54",
     accent: '#FFC8DD',
     accentText: "#ffc8ddd9",
+    accentBackground: "#ffc8dd40",
     highlight: '#BDE0FE',
     muted: '#D3D3D3',
     red: '#FF595E',
     yellow: '#FFCA3A',
     green: '#8AC926',
     blue: '#1982C4',
-    purple: '#6A4C93'
+    purple: '#6A4C93',
+    white: "FFF"
   },
   text:{
     default: {
@@ -79,7 +81,7 @@ export default {
       fontSize: 3,
       fontWeight: 'bold',
       my: 1,
-      textDecoration: 'underline',
+      // textDecoration: 'underline',
     },
   },
   buttons: {

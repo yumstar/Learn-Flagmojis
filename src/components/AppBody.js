@@ -9,6 +9,7 @@ import store from "@/app/store"
 import { Spinner } from "theme-ui";
 import { useState, useEffect } from "react"
 import { deleteCookie, hasCookie, setCookie } from "cookies-next"
+import { titleStyles } from "@/styles/appStyles"
 
 export default function AppBody({ children }) {
  const [authStatus, setAuthStatus] = useState(false);
@@ -47,7 +48,7 @@ const handleAuthOperation = (e) => {
     <ThemeProvider theme={theme}>
     <div>
     <Container sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-    {authStatus && window.location.pathname != HOMEPATH?<Link href="/"><h1 sx={{color: 'primary', fontFamily: 'heading', cursor: 'pointer'}}>Flagmojis</h1></Link>: <h1 sx={{color: 'primary', fontFamily: 'heading'}}>Flagmojis</h1>}
+    {authStatus && window.location.pathname != HOMEPATH?<Link href="/"><h1 sx={titleStyles}>Flagmojis</h1></Link>: <h1 sx={titleStyles}>Flagmojis</h1>}
     </Container>
     <Container sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
     <Button variant="primary" sx={{mx: 3, cursor: 'pointer'}} onClick={handleAuthOperation}>{authStatus? "Log out": "Log in"}</Button>

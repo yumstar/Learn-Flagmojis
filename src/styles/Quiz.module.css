@@ -1,0 +1,3 @@
+input[type="radio"]:checked+label.quiz-option{
+    background-color: red;
+font-size: 2em; }

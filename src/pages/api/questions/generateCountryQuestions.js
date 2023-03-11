@@ -11,9 +11,7 @@ const handler = async (req, res) => {
         const id = req.body.id
         const queryEmojiRes = await client.query(countryAttributeQuery(id, "emoji"));
         const emoji = queryEmojiRes.data.country["emoji"]
-        console.log(emoji)
         var questionsChosen = [];
-        let questions;
         var queriesMade = 0;
         var optionQueriesMade = 0;
         var codes;
@@ -29,7 +27,6 @@ const handler = async (req, res) => {
                 await client.query(countryAttributeQuery(id, typeString)).then((res) => {
                     var resData = res.data.country[typeString];
                     var resDataDataType = typeof resData
-     
                     if (resDataDataType != 'undefined' && resData !== null) {
                         
                         switch (resDataDataType) {
@@ -61,7 +58,7 @@ const handler = async (req, res) => {
                     }
                 })
                 
-                while (options.length < 4 && optionQueriesMade < 30) {
+                while (options.length < 4 && optionQueriesMade < 40) {
                     const randomIndex = Math.floor(Math.random(0, codes.length) * codes.length);
                     const randomCode = codes[randomIndex].code;
                     if (randomCode == id) {
@@ -116,7 +113,7 @@ const handler = async (req, res) => {
                 }
 
                 const statement = createQuestionStatement(typeString, emoji);
-                questionsChosen.push({ type: typeString, question: statement, answers: options })
+                questionsChosen.push({ type: typeString, question: statement, answers: options, isMultiAnswer: (typeString == "states" || typeString == "languages")})
             }
             queriesMade++;
         }

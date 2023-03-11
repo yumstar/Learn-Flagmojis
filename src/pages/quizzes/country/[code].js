@@ -2,6 +2,8 @@ import AppBody from '@/components/AppBody'
 import { useRouter } from 'next/router'
 import { sendApi } from '@/utils/api'
 import { useState, useEffect } from 'react'
+import { Container, Spinner } from 'theme-ui'
+import Quiz from '@/components/Quiz'
 export default function CountryQuiz({}) {
     const [questions, setQuestions] = useState([])
     const router = useRouter()
@@ -20,6 +22,9 @@ export default function CountryQuiz({}) {
     }, []);
     console.log(questions)
     return (<AppBody>
-        <div>{code}</div>
+        <Container>
+            {questions.length == 0 && <Spinner></Spinner>}
+            {questions.length > 0  && <Quiz questions={questions}></Quiz>}
+        </Container>
     </AppBody>)
 }
