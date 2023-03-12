@@ -8,7 +8,7 @@ import * as quizStyles from "@/styles/quizStyles"
 import { sendApi } from "@/utils/api"
 import { useState, useEffect } from "react"
 import _ from "lodash"
-export default function Quiz({questions}) {
+export default function Quiz({code, questions, markURI}) {
     const [displayQuestion, setDisplayQuestion] = useState({});
     const [displayIndex, setDisplayIndex] = useState(0)
     const [messageType, setMessageType] = useState("");
@@ -47,11 +47,21 @@ export default function Quiz({questions}) {
     }
     const handleSubmit = async (values) =>{
       try{
+        const submission = {}
+        if(code){
+            submission["id"] = code
+        }
+        let valueEntries = Object.entries(values)
+        submission["questions"] = []
+        for (var [key, value] of valueEntries) {
+            submission["questions"].push({"type": key, "answer": value})
+        }
+        await sendApi(submission, markURI);
+        }
         
         // router.push('/')
-      }
       catch(error) {
-
+        console.log("error submitting answers")
       }
       
       

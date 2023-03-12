@@ -24,7 +24,7 @@ export default function CountryQuiz({}) {
     return (<AppBody>
         <Container>
             {questions.length == 0 && <Spinner></Spinner>}
-            {questions.length > 0  && <Quiz questions={questions}></Quiz>}
+            {questions.length > 0  && <Quiz code={code} questions={questions} markURI="/api/questions/markCountryQuestions"></Quiz>}
         </Container>
     </AppBody>)
 }
