@@ -39,8 +39,18 @@ const handler = async (req, res) => {
                         var questionListLength = ((await CountryQuestionList.findOne({'country.code': code})).list).length
                         scores[i] = {...scores[i], totalQuestions: questionListLength}
                     }
-                    
-                   res.status(200).send(scores)
+                    const sortedScores = scores.sort((score1, score2) => {
+                        if(score1.countryCode < score2.countryCode) {
+                            return -1;
+                        }
+                        else if(score1.countryCode > score2.countryCode){
+                            return 1;
+                        }
+                        else {
+                            return 0;
+                        }
+                    })
+                   res.status(200).send(sortedScores)
 
                 }
                 else {

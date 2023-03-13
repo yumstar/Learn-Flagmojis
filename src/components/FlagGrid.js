@@ -4,6 +4,9 @@ import axios from "axios";
 import{ countriesQuery }  from "@/queries/countriesQuery";
 import FlagCard from "./FlagCard";
 import { Spinner } from "theme-ui";
+import { Poiret_One } from "@next/font/google";
+
+const poiret_one = Poiret_One({weight: "400", subsets: ["latin"]} )
 
 export default function FlagGrid() {
     const styles = {
@@ -34,7 +37,7 @@ useEffect(() => {
     };
 }, [getCountries]); 
     return (
-        <Container sx={styles} >
+        <Container sx={styles} className={poiret_one.className}>
             {flags.length == 0 && <Spinner sx={{color: 'accent'}}/>}
             {flags.map(({code,name, emoji}, i) => <FlagCard code={code} name={name} emoji={emoji} key={i} childIndex={i}/>)}
         </Container>

@@ -10,13 +10,17 @@ import { Spinner } from "theme-ui";
 import { useState, useEffect } from "react"
 import { deleteCookie, hasCookie, setCookie } from "cookies-next"
 import { titleStyles } from "@/styles/appStyles"
-
+import { useSelector, useDispatch } from "react-redux"
+import { clearScores } from "@/features/quizScoresSlice"
 export default function AppBody({ children }) {
  const [authStatus, setAuthStatus] = useState(false);
+ const [onAccountPage, setOnAccountPage] = useState(false)
  const router = useRouter();
+ const dispatch = useDispatch();
  const HOMEPATH = "/"
  useEffect(() => {
    const authPath = new RegExp('\/auth\/.*');
+   const accountPath = new RegExp(('\/learner\/Account.*'))
    // token = window.localStorage.getItem("userToken");
    if(!hasCookie('userToken')) {
       setAuthStatus(false);
@@ -27,24 +31,22 @@ export default function AppBody({ children }) {
     else {
       setAuthStatus(true);
     }
+    setOnAccountPage(accountPath.test(window.location.pathname))
  });
 
 
 
 const handleAuthOperation = (e) => {
-      // token = window.localStorage.getItem("userToken");
-      // if(token) {
-      //    window.localStorage.removeItem("userToken");
-      // }
       if(hasCookie('userToken')) {
          deleteCookie('userToken')
+         dispatch(clearScores())
          setAuthStatus(false)
       }
       router.reload();
       router.push("/auth/LearnerSignIn")
+
 }
  return  (
-    <Provider store={store}>
     <ThemeProvider theme={theme}>
     <div>
     <Container sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
@@ -52,13 +54,12 @@ const handleAuthOperation = (e) => {
     </Container>
     <Container sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
     <Button variant="primary" sx={{mx: 3, cursor: 'pointer'}} onClick={handleAuthOperation}>{authStatus? "Log out": "Log in"}</Button>
-    <Link href="/learner/Account/"><Button variant="primary" sx={{mx: 3, cursor: 'pointer', display: authStatus? "inline": "none"}}>My Account</Button></Link>
+    <Link href="/learner/Account/"><Button variant="primary" sx={{mx: 3, cursor: 'pointer', display: authStatus && !onAccountPage? "inline": "none"}}>My Account</Button></Link>
     </Container>
     <main>
     {children? children: <Spinner sx={{color: 'accent', display: 'block', margin: 'auto'}}/>}
     </main>
     </div>
     </ThemeProvider>
-    </Provider>
  )
 }

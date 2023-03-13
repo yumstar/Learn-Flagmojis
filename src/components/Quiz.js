@@ -36,7 +36,7 @@ export default function Quiz({code, questions, markURI}) {
         const answers = question.answers;
         const type = question.type;
         if(answers && type){
-            return answers.map((answer) => {return (<Box sx={valueSelected == answer?quizStyles.questionOptionBoxCheckedStyles : quizStyles.questionOptionBoxStyles}><Label sx={quizStyles.questionOptionStyles}>
+            return answers.map((answer, index) => {return (<Box key={index} sx={valueSelected == answer?quizStyles.questionOptionBoxCheckedStyles : quizStyles.questionOptionBoxStyles}><Label sx={quizStyles.questionOptionStyles}>
                 <Field type={question.isMultiAnswer? "checkbox": "radio"} name={displayQuestion.type} value={answer} onClick={(e) => setValueSelected(answer)} sx={quizStyles.questionOptionFieldStyles}/>
                 {answer}
             </Label></Box>)})
@@ -47,6 +47,7 @@ export default function Quiz({code, questions, markURI}) {
     }
     const handleSubmit = async (values) =>{
       try{
+        console.log(questions)
         const submission = {}
         if(code){
             submission["id"] = code
@@ -54,18 +55,37 @@ export default function Quiz({code, questions, markURI}) {
         let valueEntries = Object.entries(values)
         submission["questions"] = []
         for (var [key, value] of valueEntries) {
-            submission["questions"].push({"type": key, "answer": value})
+            if(questions.find((question) => question.type == key)){
+                submission["questions"].push({"type": key, "answer": value})
+            }
+            
         }
-        await sendApi(submission, markURI);
+        const results = await sendApi(submission, markURI)
+        const resultsList = results.data.resultsMarked
+        console.log(submission)
+        console.log(results)
+        var total = resultsList.length;
+        var score = 0;
+        for(var i = 0; i < resultsList.length; i++){
+            const result = resultsList[i];
+            score += result.currentAttemptScore;
+        }
+        console.log(score)
+        console.log(total)
+        router.push({
+            pathname: "/quizzes/quiz/Result/",
+            query: {quizCode: code, quizScore: score, quizTotal: total}
+        }, "/quizzes/quiz/Result/")
         }
         
-        // router.push('/')
+
       catch(error) {
         console.log("error submitting answers")
       }
       
       
     }
+    // console.log(quizInitValues(questions))
     return ( <Box className="quiz-container" sx={quizStyles.QuizFormContainerStyles}>
          
       <div className="quiz" sx={quizStyles.QuizFormOuterStyles}>

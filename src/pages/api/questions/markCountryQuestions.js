@@ -119,7 +119,7 @@ const handler = async(req, res) => {
                 else {
                     questionResult = await QuestionResult.create({user: userEmail, question: {code: currentResult.code, type: currentResult.type, answerType: currentResult.givenAnswerType}, result: currentResult.points})
                 } 
-                resultsList.push({user: userEmail, code: questionResult.question.code, type: questionResult.question.type})
+                resultsList.push({user: userEmail, code: questionResult.question.code, type: questionResult.question.type, currentAttemptScore: currentResult.points})
             }
             else {
                 res.status(400).send({message: "Invalid question type or answer type for country"})

@@ -58,7 +58,7 @@ const handler = async (req, res) => {
                     }
                 })
                 
-                while (options.length < 4 && optionQueriesMade < 40) {
+                while (options.length < 4 && optionQueriesMade < 60) {
                     const randomIndex = Math.floor(Math.random(0, codes.length) * codes.length);
                     const randomCode = codes[randomIndex].code;
                     if (randomCode == id) {
