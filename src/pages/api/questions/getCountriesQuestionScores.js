@@ -27,7 +27,6 @@ const handler = async (req, res) => {
                         const country = scores.find((country) =>  country.countryCode == code && typeof country.score == 'number');
                         if(country){
                             const index = scores.indexOf(country);
-                            console.log(index)
                             scores[index] = {...country, score: (country.score + result.result)}
                         }
                         else {

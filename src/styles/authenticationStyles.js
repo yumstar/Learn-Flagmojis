@@ -43,10 +43,10 @@ export const errorStyles = {
 export const messageStyles = {
     display: 'flex',
     alignItems: 'center',
-    // justifyContent: 'center',
     alignContent: 'center',
     border: '1px solid black',
     borderRadius: 'small',
     borderWidth: 'normal',
     borderStyle: 'solid',
+    p: 1
 }

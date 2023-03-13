@@ -17,7 +17,10 @@ export default function SignUp() {
   const handleSubmit = async (values) =>{
     try{
       const res = await sendApi(values, "/api/LearnerCreate/");
-      router.push('/auth/LearnerSignIn')
+      router.push({
+        pathname: "/auth/LearnerSignIn",
+        query: {signUpRedirect: true}
+    }, "/auth/LearnerSignIn")
     }
     catch(error) {
       setMessageType('failure')

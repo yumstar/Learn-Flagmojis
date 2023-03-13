@@ -66,7 +66,6 @@ const handler = async (req, res) => {
                     }
                     else {
                         await client.query(countryAttributeQuery(randomCode, typeString)).then((optionRes) => {
-                            console.log(optionRes)
                             var optionResData = optionRes.data.country[typeString];
                             var optionResDataDataType = typeof optionResData
 

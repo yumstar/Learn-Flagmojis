@@ -15,7 +15,7 @@ export default function Account(props) {
     }, []);
     return    ( <AppBody>
     <Box className="learner-page" sx={accountInfoComponentStyles} >
-      {!userData && <Spinner sx={{color: 'accent'}}/>}
+      {!userData && <Spinner sx={{color: 'accent', display: 'block', margin: 'auto'}}/>}
       {userData && <LearnerInfoContainer userDataObj={userData}/>}
 
     </Box>

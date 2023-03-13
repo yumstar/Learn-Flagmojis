@@ -20,10 +20,9 @@ export default function CountryQuiz({}) {
             setQuestions(questionsRes.data)
         })
     }, []);
-    console.log(questions)
     return (<AppBody>
         <Container>
-            {questions.length == 0 && <Spinner></Spinner>}
+            {questions.length == 0 && <Spinner sx={{color: 'accent', display: 'block', margin: 'auto'}}/>}
             {questions.length > 0  && <Quiz code={code} questions={questions} markURI="/api/questions/markCountryQuestions"></Quiz>}
         </Container>
     </AppBody>)

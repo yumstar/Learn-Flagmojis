@@ -39,7 +39,6 @@ export const countriesSlice = createSlice({
                         const attributeExists = countryCopy.hasOwnProperty(attribute.name)
                         if(!attributeExists){
                             countryCopy[attribute.name] = attribute.value
-                            console.log(countryCopy)
                             var updatedCountries = state.countries.map((country, index) => index == countryIndex? {...countryCopy}: country)
                             state.countries = updatedCountries;
                         }

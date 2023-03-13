@@ -66,6 +66,7 @@ const countryInfoListString = (list) => {
     const containerStyles = {
         position: 'relative',
         maxWidth: '200px',
+        minWidth: '175px',
         minHeight: '200px',
         width: 1,
         height: 3,
@@ -95,6 +96,7 @@ const countryInfoListString = (list) => {
         flexDirection: 'column',
         alignItems: 'center',
         zIndex: 0,
+        textAlign: 'center'
         // justifyContent: 'center',
 
     }
@@ -134,7 +136,7 @@ const countryInfoListString = (list) => {
         textAlign: 'center',
         zIndex: '50',
         fontFamily: 'info',
-        fontSize: 3,
+        fontSize: 2,
         opacity: '1',
     }
     const labelStyles = {

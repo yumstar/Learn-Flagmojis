@@ -47,7 +47,6 @@ export default function Quiz({code, questions, markURI}) {
     }
     const handleSubmit = async (values) =>{
       try{
-        console.log(questions)
         const submission = {}
         if(code){
             submission["id"] = code
@@ -62,16 +61,12 @@ export default function Quiz({code, questions, markURI}) {
         }
         const results = await sendApi(submission, markURI)
         const resultsList = results.data.resultsMarked
-        console.log(submission)
-        console.log(results)
         var total = resultsList.length;
         var score = 0;
         for(var i = 0; i < resultsList.length; i++){
             const result = resultsList[i];
             score += result.currentAttemptScore;
         }
-        console.log(score)
-        console.log(total)
         router.push({
             pathname: "/quizzes/quiz/Result/",
             query: {quizCode: code, quizScore: score, quizTotal: total}
@@ -85,7 +80,6 @@ export default function Quiz({code, questions, markURI}) {
       
       
     }
-    // console.log(quizInitValues(questions))
     return ( <Box className="quiz-container" sx={quizStyles.QuizFormContainerStyles}>
          
       <div className="quiz" sx={quizStyles.QuizFormOuterStyles}>
