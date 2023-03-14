@@ -14,7 +14,7 @@ export default function Account(props) {
         getUserData()
     }, []);
     return    ( <AppBody>
-    <Box className="learner-page" sx={accountInfoComponentStyles} >
+    <Box className="learner-page">
       {!userData && <Spinner sx={{color: 'accent', display: 'block', margin: 'auto'}}/>}
       {userData && <LearnerInfoContainer userDataObj={userData}/>}
 

@@ -2,7 +2,7 @@ export const accountInfoComponentStyles = {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     maxWidth: 7,
     mx: 'auto',
     my: 6,

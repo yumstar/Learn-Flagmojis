@@ -5,7 +5,7 @@ export const accountInfoStyles = {
     alignItems: 'flex-start',
     alignContent: 'flext-start',
     justifyContent: 'center',
-    pb: 5
+    pb: 5,
 }
 
 export const accountInfoHeadingContainerStyles = {
@@ -17,7 +17,7 @@ export const accountInfoLabelStyles = {
     fontFamily: 'heading',
     fontWeight: 'bold',
     color: 'secondaryText',
-    mx: 1
+    ml: '-3',
 }
 
 export const accountInfoValueStyles = {
@@ -25,10 +25,11 @@ export const accountInfoValueStyles = {
 }
 
 export const personalInfoContainerStyles = {
-    maxWidth: 3,
-    width: '24em',
+    maxWidth: 2,
     // mx: 'auto',
-    // flex: 2,
+    width: 'fit-content',
+    flexGrow: '30',
+    // float: 'left',
     borderWidth: 'thin',
     borderColor: 'highlight', 
     borderStyle: 'solid',
@@ -37,14 +38,28 @@ export const personalInfoContainerStyles = {
 } 
 
 export const scoreInfoContainerStyles = {
-    maxWidth: 3,
-    width: '30em',
+    maxWidth: 5,
     // mx: 'auto',
-    flex: 2,
+    width: 'fit-content',
+    border: '1px solid black',
+    flexGrow: '70',
     ml: 4,
     borderWidth: 'thin',
     borderColor: 'highlight', 
     borderStyle: 'solid',
     borderRadius: 'large',
     backgroundColor: 'primaryBackground',
-} 
+}
+export const scoreListStyles = {
+    width: 9,
+    display: 'flex',
+    // alignItems: 'center',
+    justifyContent: 'flex-start',
+    // border: '1px solid black'
+}
+
+export const scoreCountryStyles = {
+    // border: '3px solid black',
+    margin: '1em',
+    flex: '50'
+}

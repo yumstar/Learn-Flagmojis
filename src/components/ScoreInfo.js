@@ -1,5 +1,5 @@
 import { Container, Box, Text } from "theme-ui"
-import { scoreInfoContainerStyles, accountInfoHeadingContainerStyles, accountInfoLabelStyles, accountInfoStyles, accountInfoValueStyles } from "@/styles/accountStyles"
+import { scoreInfoContainerStyles, scoreListStyles, scoreCountryStyle, accountInfoHeadingContainerStyles, accountInfoLabelStyles, accountInfoStyles, accountInfoValueStyles } from "@/styles/accountStyles"
 import { useSelector, useDispatch } from "react-redux";
 import { selectToken, selectLoaded, selectScores, loadToken, selectTokenLoaded, getScores } from "@/features/quizScoresSlice";
 import { getCookie } from "cookies-next";
@@ -33,7 +33,6 @@ export default function ScoreInfo({name, email}) {
         }
         
     }, [loaded])
-    console.log(quizScores)
     return (
     <>
         <Box className="score-info" sx={scoreInfoContainerStyles}>
@@ -41,18 +40,10 @@ export default function ScoreInfo({name, email}) {
         <Text variant="cardHeading" sx>Quiz Scores</Text>
         </Container>
         <Container sx={accountInfoStyles}>
-        <Box>
+        <Box sx={scoreListStyles}>
             {quizScores.length < 1 && <Text variant="body">No scores to display yet!</Text>}
-            {quizScores.length > 0 && quizScores.map((score, index) => {return <CountryScore key={index} score={score} />})}
+            {quizScores.length > 0 && quizScores.map((score, index) => {return <CountryScore key={index} score={score} sx={scoreCountryStyle} />})}
         </Box>
-        {/* <Box>
-            <Text sx={accountInfoLabelStyles}>Learner:</Text>
-            <Text sx={accountInfoValueStyles}>{name}</Text>
-        </Box>
-        <Box>
-            <Text sx={accountInfoLabelStyles}>Email:</Text>
-            <Text sx={accountInfoValueStyles}>{email}</Text>
-        </Box> */}
         </Container>
         </Box>
     </>

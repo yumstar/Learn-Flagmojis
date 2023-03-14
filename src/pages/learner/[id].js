@@ -14,7 +14,6 @@ export default function LearnerInfo({learnerId, userDataObj }) {
 
 export async function getStaticPaths() {
   const ids = await getLearnerPaths();
-  // console.log(ids)
   const paths =  ids.map((id) => {
     return {
       params: {

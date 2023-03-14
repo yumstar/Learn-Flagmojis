@@ -79,7 +79,6 @@ mongoose.connect(process.env.LEARN_DB_URI).then(async (res) => {
     var countriesInfo = []
     await client.query(allCountriesNamedInfoQuery()).then(async (res) => {
       countriesInfo = res.data.countries;
-      // console.log(countriesInfo)
       for (var i = 0; i < countriesInfo.length; i++) {
         var currentCountry = countriesInfo[i]
         var countryModel = await queryCountry(currentCountry)
@@ -87,7 +86,6 @@ mongoose.connect(process.env.LEARN_DB_URI).then(async (res) => {
           countryModel = await CountryQuestionList.create({ country: { code: currentCountry.code } })
         }
         var questionList = countryModel.list
-        // console.log(questionList)
         var fields = Object.getOwnPropertyNames(currentCountry).filter(field => field != '__typename' && field != 'code')
         const countryCode = currentCountry["code"];
         for (var j = 0; j < fields.length; j++) {
@@ -142,7 +140,7 @@ mongoose.connect(process.env.LEARN_DB_URI).then(async (res) => {
             }
           }
 
-          // console.log(answer)
+    
         }
         await CountryQuestionList.findOneAndUpdate({'country.code': countryCode}, {list: questionList})
       }
