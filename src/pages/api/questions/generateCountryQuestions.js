@@ -11,6 +11,7 @@ const handler = async (req, res) => {
         const id = req.body.id
         const queryEmojiRes = await client.query(countryAttributeQuery(id, "emoji"));
         const emoji = queryEmojiRes.data.country["emoji"]
+        console.log(emoji)
         var questionsChosen = [];
         var queriesMade = 0;
         var optionQueriesMade = 0;

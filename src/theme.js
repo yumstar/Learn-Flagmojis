@@ -86,6 +86,7 @@ export default {
   },
   buttons: {
     primary: {
+      cursor: 'pointer',
       color: 'background',
       bg: 'secondary',
       my: 3,
@@ -95,6 +96,7 @@ export default {
       }
     },
     submit: {
+      cursor: 'pointer',
       color: 'background',
       bg: 'secondary',
       my: 3,

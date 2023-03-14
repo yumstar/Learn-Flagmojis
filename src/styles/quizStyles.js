@@ -16,7 +16,7 @@ export const QuizFormOuterStyles = {
     borderColor: 'muted',
     borderStyle: 'solid',
     borderWidth: 'thin',
-    boxShadow: ' 6px 1px 21px -7px rgba(130,130,130,0.81);'
+    boxShadow: ' 6px 1px 21px -7px rgba(130,130,130,0.81)'
 }
 export const QuizFormContainerStyles = {
     display: 'flex',
@@ -122,4 +122,48 @@ export const messageStyles = {
     borderRadius: 'small',
     borderWidth: 'normal',
     borderStyle: 'solid',
+}
+
+export const quizResultStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    px: 3
+}
+
+export const quizResultPageStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '100vh',
+}
+
+export const quizResultBoxStyles = {
+    boxShadow: ' 6px 1px 21px -6px rgba(130,130,130,0.21)',
+    borderRadius: 'normal',
+    borderColor: 'highlight',
+    borderStyle: 'solid',
+    borderWidth: 'normal',
+    p: 4,
+    m: 1
+}
+
+export const quizResultSubmissionContainerStyles = {
+    // margin: 'auto',
+    borderRadius: 'normal',
+    minHeight: '30vh',
+    maxHeight: '40vh',
+    height: '25em',
+    width: '30em',
+    maxWidth: '30em',
+    minWidth: '20vw',
+    borderColor: 'muted',
+    borderStyle: 'solid',
+    borderWidth: 'thin',
+    borderRadius: 'normal',
+    boxShadow: '6px 1px 21px -7px rgba(130,130,130,0.81)',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
 }

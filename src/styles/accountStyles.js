@@ -61,5 +61,5 @@ export const scoreListStyles = {
 export const scoreCountryStyles = {
     // border: '3px solid black',
     margin: '1em',
-    flex: '50'
+    // flex: '50'
 }

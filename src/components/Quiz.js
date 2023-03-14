@@ -2,13 +2,13 @@
 import { useRouter } from "next/router"
 import {quizInitValues, signUpInitValues, signUpValidationSchema} from "../utils/validation"
 import { Formik, Form, Field, ErrorMessage } from "formik"
-import { Box, Text, Label, Button, Message,} from "theme-ui"
-import "@/styles/Quiz.module.css"
+import { Box, Text, Label, Button, Message, Spinner} from "theme-ui"
 import * as quizStyles from "@/styles/quizStyles"
 import { sendApi } from "@/utils/api"
 import { useState, useEffect } from "react"
 import _ from "lodash"
 export default function Quiz({code, questions, markURI}) {
+    const [waitingRes, setWaitingRes] = useState(false);
     const [displayQuestion, setDisplayQuestion] = useState({});
     const [displayIndex, setDisplayIndex] = useState(0)
     const [messageType, setMessageType] = useState("");
@@ -68,9 +68,9 @@ export default function Quiz({code, questions, markURI}) {
             score += result.currentAttemptScore;
         }
         router.push({
-            pathname: "/quizzes/quiz/Result/",
+            pathname: "/quizzes/quiz/result/",
             query: {quizCode: code, quizScore: score, quizTotal: total}
-        }, "/quizzes/quiz/Result/")
+        }, "/quizzes/quiz/result/")
         }
         
 
@@ -97,9 +97,9 @@ export default function Quiz({code, questions, markURI}) {
                 <Button variant="secondary" type="button" onClick={movePreviousQuestion} sx={quizStyles.questionNavButtons}>Prev</Button>
                 <Text sx={quizStyles.questionNavIndex}>{(displayIndex + 1) + "/" + questions.length}</Text>
                 {displayIndex < (questions.length - 1) && <Button variant="secondary" type="button" onClick={moveNextQuestion} sx={quizStyles.questionNavButtons}>Next</Button>}
-                {displayIndex === (questions.length - 1) && _.isEqual(displayQuestion, questions[(questions.length - 1)]) && <Button variant="submit" type="submit" onClick={handleSubmit}sx={quizStyles.questionNavButtons}>Submit</Button>}
+                {displayIndex === (questions.length - 1) && _.isEqual(displayQuestion, questions[(questions.length - 1)]) && !waitingRes && <Button variant="submit" type="submit" onClick={handleSubmit}sx={quizStyles.questionNavButtons}>Submit</Button>}
+                {waitingRes && <Spinner sx={{ color: 'primary'}} />}
             </Box>
-            
           </Form>
     )
           }
