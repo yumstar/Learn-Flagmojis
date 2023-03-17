@@ -45,49 +45,51 @@ export default function Quiz({code, questions, markURI}) {
             throw console.error("question does not have answers or a type");
         } 
     }
-    const handleSubmit = async (values) =>{
-      try{
-        const submission = {}
-        if(code){
-            submission["id"] = code
-        }
-        let valueEntries = Object.entries(values)
-        submission["questions"] = []
-        for (var [key, value] of valueEntries) {
-            if(questions.find((question) => question.type == key)){
-                submission["questions"].push({"type": key, "answer": value})
-            }
-            
-        }
-        const results = await sendApi(submission, markURI)
-        const resultsList = results.data.resultsMarked
-        var total = resultsList.length;
-        var score = 0;
-        for(var i = 0; i < resultsList.length; i++){
-            const result = resultsList[i];
-            score += result.currentAttemptScore;
-        }
-        router.push({
-            pathname: "/quizzes/quiz/result/",
-            query: {quizCode: code, quizScore: score, quizTotal: total}
-        }, "/quizzes/quiz/result/")
-        }
-        
 
-      catch(error) {
-        console.log("error submitting answers")
-      }
-      
-      
-    }
     return ( <Box className="quiz-container" sx={quizStyles.QuizFormContainerStyles}>
          
       <div className="quiz" sx={quizStyles.QuizFormOuterStyles}>
         <Formik
           initialValues={quizInitValues(questions)}
-          onSubmit={handleSubmit}
+          onSubmit={
+            async (values) => {
+                try{
+                    const submission = {}
+                    if(code){
+                        submission["id"] = code
+                    }
+                    
+                    let valueEntries = Object.entries(values)
+                    submission["questions"] = []
+                    for(var i = 0; i < valueEntries.length; i++) {
+                        const key = valueEntries[i][0];
+                        const value = valueEntries[i][1];
+                        if(questions.find((question) => question.type == key)){
+                            submission["questions"].push({"type": key, "answer": value})
+                        }
+                    }
+                    const results = await sendApi(submission, markURI)
+                    const resultsList = results.data.resultsMarked
+                    var total = resultsList.length;
+                    var score = 0;
+                    for(var i = 0; i < resultsList.length; i++){
+                        const result = resultsList[i];
+                        score += result.currentAttemptScore;
+                    }
+                    router.push({
+                        pathname: "/quizzes/quiz/result/",
+                        query: {quizCode: code, quizScore: score, quizTotal: total}
+                    }, "/quizzes/quiz/result/")
+                    }
+                    
+            
+                  catch(error) {
+                    console.log("error submitting answers")
+                  }
+            }
+          }
         >
-          {({ errors, touched }) => (
+          {() => (
             <Form sx={quizStyles.QuizFormStyles}>
              {displayQuestion && displayQuestion.question && <Message sx={quizStyles.questionBoxStyles}><Text className="question-emoji" sx={quizStyles.questionEmojiStyles}>📖</Text><Text className="question-text" sx={quizStyles.questionTextStyles}>{displayQuestion.question}</Text></Message>}
              <Box className="question-options" sx={quizStyles.questionOptionsBoxStyles}>

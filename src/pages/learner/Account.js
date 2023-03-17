@@ -13,7 +13,7 @@ export default function Account(props) {
     useEffect(() => {
         getUserData()
     }, []);
-    return    ( <AppBody>
+    return ( <AppBody>
     <Box className="learner-page">
       {!userData && <Spinner sx={{color: 'accent', display: 'block', margin: 'auto'}}/>}
       {userData && <LearnerInfoContainer userDataObj={userData}/>}
