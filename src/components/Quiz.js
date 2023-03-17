@@ -77,7 +77,7 @@ export default function Quiz({code, questions, markURI}) {
                         score += result.currentAttemptScore;
                     }
                     router.push({
-                        pathname: "/quizzes/quiz/result/",
+                        pathname: "../quiz/result/",
                         query: {quizCode: code, quizScore: score, quizTotal: total}
                     })
                     }
