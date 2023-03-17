@@ -5,7 +5,7 @@ import Link from "next/link"
 import { ThemeProvider, Container, Button } from 'theme-ui'
 import  theme  from '../theme.js'
 import { Provider } from 'react-redux'
-import store from "@/app/store"
+// import store from "@/app/store"
 import { Spinner } from "theme-ui";
 import { useState, useEffect } from "react"
 import { deleteCookie, hasCookie, setCookie } from "cookies-next"
