@@ -99,7 +99,7 @@ export default function Quiz({code, questions, markURI}) {
                 <Button variant="secondary" type="button" onClick={movePreviousQuestion} sx={quizStyles.questionNavButtons}>Prev</Button>
                 <Text sx={quizStyles.questionNavIndex}>{(displayIndex + 1) + "/" + questions.length}</Text>
                 {displayIndex < (questions.length - 1) && <Button variant="secondary" type="button" onClick={moveNextQuestion} sx={quizStyles.questionNavButtons}>Next</Button>}
-                {displayIndex === (questions.length - 1) && _.isEqual(displayQuestion, questions[(questions.length - 1)]) && !waitingRes && <Button variant="submit" type="submit" onClick={handleSubmit}sx={quizStyles.questionNavButtons}>Submit</Button>}
+                {displayIndex === (questions.length - 1) && _.isEqual(displayQuestion, questions[(questions.length - 1)]) && !waitingRes && <Button variant="submit" type="submit" sx={quizStyles.questionNavButtons}>Submit</Button>}
                 {waitingRes && <Spinner sx={{ color: 'primary'}} />}
             </Box>
           </Form>
