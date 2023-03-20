@@ -16,7 +16,7 @@ export default function Result({quizCode, quizTotal, quizScore}) {
         setCountry(countries[index])
         const getEmoji = async() => {
             await dispatch(getCountryAttributes(quizCode, ["emoji"])).then(() => {
-                console.log(country)
+                // console.log(country)
                 if(country){
                     setEmoji(country.emoji)
                 }

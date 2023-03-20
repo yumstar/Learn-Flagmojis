@@ -23,7 +23,6 @@ export const QuizFormContainerStyles = {
     flexDirection: 'column',
     justifyContent: 'center',
     height: '100vh',
-        // border: '2px solid black'
 }
 export const QuizFormStyles = {
     width: '40em',

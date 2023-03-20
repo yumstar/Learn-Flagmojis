@@ -21,18 +21,17 @@ export default function ScoreInfo({name, email}) {
         const getQuizScores = async() =>{
             dispatch(getScores())
         }
-        if(tokenLoaded && !loaded){
+        if(tokenLoaded){
             getQuizScores();
         }
-    }, [userToken])
+    }, [])
 
     useEffect(() => {
-        console.log(loaded)
         if(loaded){
             setQuizScores(scores)
         }
         
-    }, [loaded])
+    }, [scores])
     return (
     <>
         <Box className="score-info" sx={scoreInfoContainerStyles}>
