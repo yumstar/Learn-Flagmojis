@@ -25,8 +25,6 @@ export default function SignIn() {
     const handleSubmit = async (values) => {
         setWaitingRes(true)
         const res = await sendApi(values, "/api/LearnerLogin/");
-        // localStorage.setItem("userToken", res.data.token)
-        // console.log(res)
         setWaitingRes(false)
         router.push("/")
     }

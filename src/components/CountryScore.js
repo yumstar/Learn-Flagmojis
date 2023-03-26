@@ -20,7 +20,6 @@ export default function CountryScore({score}) {
         setCountry(countries[index])
         const getEmoji = async() => {
             await dispatch(getCountryAttributes(score.countryCode, ["emoji"])).then(() => {
-                // console.log(country)
                 if(country){
                     setEmoji(country.emoji)
                 }

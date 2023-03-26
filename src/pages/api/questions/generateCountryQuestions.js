@@ -24,7 +24,6 @@ const handler = async (req, res) => {
             var options = [];
             if (!questionsChosen.find(questionType => { return questionType.type == typeString })) {
                 options = [];
-                // console.log(typeString)
                 await client.query(countryAttributeQuery(id, typeString)).then((res) => {
                     var resData = res.data.country[typeString];
                     var resDataDataType = typeof resData
@@ -58,6 +57,8 @@ const handler = async (req, res) => {
                         }
                     }
                 })
+
+                if(options.length == 0) continue;
                 
                 while (options.length < 4 && optionQueriesMade < 60) {
                     const randomIndex = Math.floor(Math.random(0, codes.length) * codes.length);

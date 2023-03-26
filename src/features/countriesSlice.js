@@ -34,7 +34,6 @@ export const countriesSlice = createSlice({
                     const countryCopy = {...targetCountry}
                   
                     const attributes = action.payload.attributes;
-                    // console.log(countryCopy)
                     attributes.forEach((attribute) => {
                         const attributeExists = countryCopy.hasOwnProperty(attribute.name)
                         if(!attributeExists){
