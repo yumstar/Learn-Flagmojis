@@ -1,5 +1,4 @@
 import { Container, Box, Text, Spinner, Button } from "theme-ui"
-import {Collapse} from 'react-collapse';
 import { useCallback, useState, useEffect } from "react";
 import { countryInfoQuery } from "@/queries/countriesQuery";
 import axios from "axios";

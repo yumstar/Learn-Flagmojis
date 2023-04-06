@@ -16,7 +16,9 @@ An educational application for learning about countries starting with their emoj
 (Future versions may include further bug fixes and improvements)
 
 ## Roadmap
-To be announced.
+ - Add timed questions to encourage faster recall
+ - Implement flashcards and spaced repetition routine for learners
+ - More features planned for soon!
 
 ## Acknowledgements
 Special thanks to Trevor Blades for his [Countries GraphQL API](https://github.com/trevorblades/countries).

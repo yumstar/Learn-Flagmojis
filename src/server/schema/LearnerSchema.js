@@ -18,7 +18,3 @@ export const learnerSchema = new mongoose.Schema({
         // unique: true
     }
 })
-
-// learnerSchema.methods.generateToken = () => {
-//     return jsonwebtoken.sign({_id: this._id}, process.env.PRIVATE_KEY, {expiresIn: '3d'})
-// }
